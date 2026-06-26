@@ -1,5 +1,7 @@
+"use client"
+
 import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui";
 import styles from "./page.module.css";
 
 type Props = Omit<ImageProps, "src"> & {
@@ -63,7 +65,10 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-        <Button appName="docs" className={styles.secondary}>
+        <Button
+          className={styles.secondary}
+          onClick={() => alert("Hello from docs!")}
+        >
           Open alert
         </Button>
       </main>
