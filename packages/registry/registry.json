@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "kgcraft-ui",
+  "homepage": "https://kgcraft-ui.dev",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A standard button component with variants.",
+      "files": [
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "accordian",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "An animated accordion component with icon controls and left/right placement.",
+      "files": [
+        {
+          "path": "components/ui/accordian.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
