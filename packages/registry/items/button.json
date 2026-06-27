@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "A standard button component with variants.",
+  "dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { buttonVariants } from \"./button-variants\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, ...props }, ref) => {\n    return (\n      <button\n        className={cn(buttonVariants({ variant, size }), className)}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\n\nButton.displayName = \"Button\";"
+    },
+    {
+      "path": "components/ui/button-variants.ts",
+      "type": "registry:ui",
+      "content": "import { cva } from \"class-variance-authority\";\n\nexport const buttonVariants = cva(\n  \"focus-visible:ring-ring inline-flex cursor-pointer items-center justify-center rounded-md text-sm font-medium transition-colors text-shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        secondary: \"bg-secondary text-secondary-foreground hover:bg-secondary/80\",\n        outline: \"border-input bg-background hover:bg-accent hover:text-accent-foreground border\",\n      },\n      size: {\n        sm: \"h-8 rounded-md px-3\",\n        md: \"h-10 px-4 py-2\",\n        lg: \"h-11 px-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"md\",\n    },\n  },\n);"
+    }
+  ]
+}

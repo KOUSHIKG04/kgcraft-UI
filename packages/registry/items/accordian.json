@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordian",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "An animated accordion component with icon controls and left/right placement.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/accordian.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { accordianVariants } from \"./accordian-variant\";\nimport { cn } from \"@/lib/utils\";\nimport { ChevronDown, ChevronUp, Minus, Plus } from \"lucide-react\";\nimport { motion, AnimatePresence } from \"framer-motion\";\n\nexport interface AccordianProps\n  extends\n    Omit<React.HTMLAttributes<HTMLDivElement>, \"content\">, \n    VariantProps<typeof accordianVariants> {\n  iconPosition?: \"left\" | \"right\";\n  iconType?: \"chevron\" | \"plus-minus\";\n  content?: React.ReactNode;\n}\n\nexport const Accordian = React.forwardRef<HTMLDivElement, AccordianProps>(\n  (\n    {\n      className,\n      variant,\n      iconPosition = \"right\",\n      iconType = \"chevron\",\n      children,\n      content,\n      ...props\n    },\n    ref,\n  ) => {\n    const [isOpen, setIsOpen] = React.useState(false);\n    const renderIcon = () => {\n      if (iconType === \"plus-minus\") {\n        return isOpen ? (\n          <Minus className=\"h-4 w-4 transition-transform duration-200\" />\n        ) : (\n          <Plus className=\"h-4 w-4 transition-transform duration-200\" />\n        );\n      }\n      return isOpen ? (\n        <ChevronUp className=\"h-4 w-4 transition-transform duration-200\" />\n      ) : (\n        <ChevronDown className=\"h-4 w-4 transition-transform duration-200\" />\n      );\n    };\n    return (\n      <div className=\"w-full max-w-xl\">\n        <div\n          className={cn(\n            accordianVariants({ variant }),\n            iconPosition === \"left\" ? \"flex-row-reverse justify-end gap-3\" : \"\",\n            className,\n          )}\n          ref={ref}\n          onClick={() => setIsOpen(!isOpen)}\n          {...props}\n        >\n          <span>{children || \"Accordion Header\"}</span>\n          <div className=\"text-muted-foreground shrink-0\">{renderIcon()}</div>\n        </div>\n        <AnimatePresence initial={false}>\n          {isOpen && (\n            <motion.div\n              initial=\"collapsed\"\n              animate=\"open\"\n              exit=\"collapsed\"\n              variants={{\n                open: { opacity: 1, height: \"auto\" },\n                collapsed: { opacity: 0, height: 0 },\n              }}\n              transition={{ duration: 0.25, ease: \"easeInOut\" }}\n              className=\"overflow-hidden\"\n            >\n              <div className=\"text-muted-foreground pt-2 pb-4 text-sm leading-relaxed\">\n                {content || \"Accordion Content goes here.\"}\n              </div>\n            </motion.div>\n          )}\n        </AnimatePresence>\n      </div>\n    );\n  },\n);\n\nAccordian.displayName = \"Accordian\";"
+    },
+    {
+      "path": "components/ui/accordian-variant.tsx",
+      "type": "registry:ui",
+      "content": "import { cva } from \"class-variance-authority\";\n\nexport const accordianVariants = cva(\n  \"flex cursor-pointer items-center justify-between py-3 font-medium transition-all select-none hover:underline\",\n  {\n    variants: {\n      variant: {\n        default: \"border-border border-b\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);"
+    }
+  ]
+}
