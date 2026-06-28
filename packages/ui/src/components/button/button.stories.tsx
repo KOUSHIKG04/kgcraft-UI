@@ -20,17 +20,17 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
-    children: "Default Button",
-    variant: "default",
+    children: "BUTTON",
+    variant: "primary",
     size: "md",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    children: "Secondary Button",
+    children: "BUTTON",
     variant: "secondary",
     size: "md",
   },
@@ -38,8 +38,24 @@ export const Secondary: Story = {
 
 export const Outline: Story = {
   args: {
-    children: "Outline Button",
+    children: "BUTTON",
     variant: "outline",
+    size: "md",
+  },
+};
+
+export const BriskPrimary: Story = {
+  args: {
+    children: "BUTTON",
+    variant: "briskPrimary",
+    size: "md",
+  },
+};
+
+export const BriskSecondary: Story = {
+  args: {
+    children: "BUTTON",
+    variant: "briskSecondary",
     size: "md",
   },
 };
