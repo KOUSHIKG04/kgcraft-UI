@@ -11,8 +11,8 @@ const App = () => {
 
       <div
         className={cn(
-          "transition-border rounded-xs border border-neutral-200 bg-neutral-100 px-40 py-30 duration-300 dark:border-neutral-800",
-          "[--pattern-fg:var(--color-neutral-800)]/5 dark:bg-neutral-800 dark:[--pattern-fg:var(--color-white)]/10 bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[20px_20px] bg-fixed",
+          "transition-border relative rounded-xs border border-neutral-200 bg-neutral-100 px-40 py-40 duration-300 perspective-[1000px] transform-3d dark:border-neutral-800",
+          "bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[20px_20px] bg-fixed [--pattern-fg:var(--color-neutral-800)]/5 dark:bg-neutral-800 dark:[--pattern-fg:var(--color-white)]/10",
         )}
       >
         <Button
