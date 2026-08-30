@@ -1,0 +1,68 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shimmer-text",
+  "type": "registry:ui",
+  "title": "Shimmer Text",
+  "description": "Looping gradient shimmer with reduced-motion support.",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2",
+    "framer-motion@^12.42.0"
+  ],
+  "files": [
+    {
+      "path": "registry/kgcraft/kgcraft-shimmer-text.tsx",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-shimmer-text.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion, type HTMLMotionProps } from \"framer-motion\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface ShimmerTextProps extends Omit<\n  HTMLMotionProps<\"span\">,\n  \"children\"\n> {\n  text: string;\n  duration?: number;\n  repeatDelay?: number;\n}\n\nexport function ShimmerText({\n  text,\n  duration = 2,\n  repeatDelay = 0.5,\n  className,\n  ...props\n}: ShimmerTextProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <motion.span\n      className={cn(\n        \"inline-block bg-[linear-gradient(110deg,var(--foreground,#171717)_35%,var(--kgcraft-primary,#eab308)_50%,var(--foreground,#171717)_65%)] bg-[length:250%_100%] bg-clip-text text-transparent\",\n        className,\n      )}\n      initial={{ backgroundPosition: \"100% center\" }}\n      animate={{\n        backgroundPosition: reduceMotion ? \"50% center\" : \"-100% center\",\n      }}\n      transition={\n        reduceMotion\n          ? { duration: 0 }\n          : { duration, repeat: Infinity, repeatDelay, ease: \"linear\" }\n      }\n      {...props}\n    >\n      {text}\n    </motion.span>\n  );\n}\n"
+    },
+    {
+      "path": "registry/kgcraft/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ],
+  "docs": "Import ShimmerText from your configured UI directory's kgcraft-shimmer-text module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+  "cssVars": {
+    "theme": {
+      "color-kgcraft-background": "var(--kgcraft-background)",
+      "color-kgcraft-primary": "var(--kgcraft-primary)",
+      "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+      "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+      "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+      "color-kgcraft-accent": "var(--kgcraft-accent)",
+      "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+      "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+      "color-kgcraft-border": "var(--kgcraft-border)",
+      "color-kgcraft-input": "var(--kgcraft-input)",
+      "color-kgcraft-ring": "var(--kgcraft-ring)"
+    },
+    "light": {
+      "kgcraft-background": "oklch(1 0 0)",
+      "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+      "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+      "kgcraft-accent": "oklch(0.97 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+      "kgcraft-border": "oklch(0.922 0 0)",
+      "kgcraft-input": "oklch(0.922 0 0)",
+      "kgcraft-ring": "oklch(0.708 0 0)"
+    },
+    "dark": {
+      "kgcraft-background": "oklch(0.145 0 0)",
+      "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+      "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+      "kgcraft-accent": "oklch(0.269 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+      "kgcraft-border": "oklch(1 0 0 / 10%)",
+      "kgcraft-input": "oklch(1 0 0 / 15%)",
+      "kgcraft-ring": "oklch(0.556 0 0)"
+    }
+  }
+}

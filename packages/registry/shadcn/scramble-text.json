@@ -1,0 +1,67 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scramble-text",
+  "type": "registry:ui",
+  "title": "Scramble Text",
+  "description": "Text reveal animation with custom characters and hover replay.",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2"
+  ],
+  "files": [
+    {
+      "path": "registry/kgcraft/kgcraft-scramble-text.tsx",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-scramble-text.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"./kgcraft-utils\";\n\nconst DEFAULT_CHARS =\n  \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*\";\n\nexport interface ScrambleTextProps extends Omit<\n  React.HTMLAttributes<HTMLSpanElement>,\n  \"children\"\n> {\n  text: string;\n  speed?: number;\n  chars?: string;\n  playOnHover?: boolean;\n}\n\nexport function ScrambleText({\n  text,\n  speed = 8,\n  chars = DEFAULT_CHARS,\n  playOnHover = false,\n  className,\n  onMouseEnter,\n  ...props\n}: ScrambleTextProps) {\n  const [output, setOutput] = React.useState(text);\n  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);\n\n  const stop = React.useCallback(() => {\n    if (timeoutRef.current) clearTimeout(timeoutRef.current);\n    timeoutRef.current = null;\n  }, []);\n\n  const play = React.useCallback(() => {\n    stop();\n    if (\n      !chars.length ||\n      window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches\n    ) {\n      setOutput(text);\n      return;\n    }\n\n    const characters = text.split(\"\");\n    let activeIndex = 0;\n    let scrambleFrame = 0;\n\n    setOutput(\n      characters\n        .map((character) => (character === \" \" ? \" \" : \"\\u00a0\"))\n        .join(\"\"),\n    );\n\n    function tick() {\n      while (characters[activeIndex] === \" \") activeIndex += 1;\n      if (activeIndex >= characters.length) {\n        setOutput(text);\n        stop();\n        return;\n      }\n\n      setOutput(\n        characters\n          .map((character, index) => {\n            if (character === \" \" || index < activeIndex) return character;\n            if (index === activeIndex)\n              return chars[Math.floor(Math.random() * chars.length)];\n            return \"\\u00a0\";\n          })\n          .join(\"\"),\n      );\n\n      scrambleFrame += 1;\n      if (scrambleFrame >= 3) {\n        activeIndex += 1;\n        scrambleFrame = 0;\n      }\n      const frameDelay = Math.max(\n        10,\n        Math.round(1000 / (Math.max(1, speed) * 3)),\n      );\n      timeoutRef.current = setTimeout(tick, frameDelay);\n    }\n\n    tick();\n  }, [chars, speed, stop, text]);\n\n  React.useEffect(() => {\n    if (!playOnHover) play();\n    return stop;\n  }, [play, playOnHover, stop]);\n\n  return (\n    <span\n      className={cn(\n        \"relative inline-block font-[Geist,Geist_Sans,ui-sans-serif,system-ui,sans-serif] tracking-tight whitespace-pre\",\n        className,\n      )}\n      {...props}\n      aria-label={props[\"aria-label\"] ?? text}\n      onMouseEnter={(event) => {\n        onMouseEnter?.(event);\n        if (playOnHover) play();\n      }}\n    >\n      <span className=\"invisible\" aria-hidden=\"true\">\n        {text}\n      </span>\n      <span className=\"absolute inset-0\" aria-hidden=\"true\">\n        {output}\n      </span>\n    </span>\n  );\n}\n"
+    },
+    {
+      "path": "registry/kgcraft/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ],
+  "docs": "Import ScrambleText from your configured UI directory's kgcraft-scramble-text module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+  "cssVars": {
+    "theme": {
+      "color-kgcraft-background": "var(--kgcraft-background)",
+      "color-kgcraft-primary": "var(--kgcraft-primary)",
+      "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+      "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+      "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+      "color-kgcraft-accent": "var(--kgcraft-accent)",
+      "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+      "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+      "color-kgcraft-border": "var(--kgcraft-border)",
+      "color-kgcraft-input": "var(--kgcraft-input)",
+      "color-kgcraft-ring": "var(--kgcraft-ring)"
+    },
+    "light": {
+      "kgcraft-background": "oklch(1 0 0)",
+      "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+      "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+      "kgcraft-accent": "oklch(0.97 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+      "kgcraft-border": "oklch(0.922 0 0)",
+      "kgcraft-input": "oklch(0.922 0 0)",
+      "kgcraft-ring": "oklch(0.708 0 0)"
+    },
+    "dark": {
+      "kgcraft-background": "oklch(0.145 0 0)",
+      "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+      "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+      "kgcraft-accent": "oklch(0.269 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+      "kgcraft-border": "oklch(1 0 0 / 10%)",
+      "kgcraft-input": "oklch(1 0 0 / 15%)",
+      "kgcraft-ring": "oklch(0.556 0 0)"
+    }
+  }
+}

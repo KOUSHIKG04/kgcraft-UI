@@ -15,6 +15,10 @@ Run the install command from the component page in your receiving app:
 ```sh
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/button.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/accordion.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/scramble-text.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/shimmer-text.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/search-bar.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/command-palette.json
 ```
 
 Browse the live component documentation at [kgcraft-ui-web.vercel.app](https://kgcraft-ui-web.vercel.app/). The documentation page automatically uses its current origin in its copyable commands.
@@ -28,6 +32,8 @@ import { Button } from "@/components/ui/kgcraft-button";
 shadcn installs source, variants, helpers, dependencies, and theme variables using your existing `components.json`. No custom KGCraft CLI, npm package, or `kgcraft-ui.json` is required. Prefixed filenames and color variables preserve your existing components and theme.
 
 See [the installation guide](docs/INSTALLATION.md) for CLI/Manual instructions, package-manager alternatives, hosting, and testing. The web app includes previews, source, copyable commands, usage, and props for each component.
+
+If you are learning how the source becomes an installable shadcn component, follow the [component practice guide](docs/PRACTICE_COMPONENTS.md).
 
 ## Development and verification
 

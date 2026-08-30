@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shimmer-text",
+  "type": "registry:ui",
+  "title": "Shimmer Text",
+  "description": "Looping gradient shimmer with reduced-motion support.",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2",
+    "framer-motion@^12.42.0"
+  ],
+  "files": [
+    {
+      "path": "components/ui/shimmer-text.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion, type HTMLMotionProps } from \"framer-motion\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface ShimmerTextProps extends Omit<\n  HTMLMotionProps<\"span\">,\n  \"children\"\n> {\n  text: string;\n  duration?: number;\n  repeatDelay?: number;\n}\n\nexport function ShimmerText({\n  text,\n  duration = 2,\n  repeatDelay = 0.5,\n  className,\n  ...props\n}: ShimmerTextProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <motion.span\n      className={cn(\n        \"inline-block bg-[linear-gradient(110deg,var(--foreground,#171717)_35%,var(--kgcraft-primary,#eab308)_50%,var(--foreground,#171717)_65%)] bg-[length:250%_100%] bg-clip-text text-transparent\",\n        className,\n      )}\n      initial={{ backgroundPosition: \"100% center\" }}\n      animate={{\n        backgroundPosition: reduceMotion ? \"50% center\" : \"-100% center\",\n      }}\n      transition={\n        reduceMotion\n          ? { duration: 0 }\n          : { duration, repeat: Infinity, repeatDelay, ease: \"linear\" }\n      }\n      {...props}\n    >\n      {text}\n    </motion.span>\n  );\n}\n"
+    },
+    {
+      "path": "components/ui/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    },
+    {
+      "path": "components/ui/kgcraft-theme.css",
+      "type": "registry:ui",
+      "content": "/* Generated KGCraft UI theme. Override --kgcraft-* to customize. */\n@theme inline {\n  --color-kgcraft-background: var(--kgcraft-background);\n  --color-kgcraft-primary: var(--kgcraft-primary);\n  --color-kgcraft-primary-foreground: var(--kgcraft-primary-foreground);\n  --color-kgcraft-secondary: var(--kgcraft-secondary);\n  --color-kgcraft-secondary-foreground: var(--kgcraft-secondary-foreground);\n  --color-kgcraft-accent: var(--kgcraft-accent);\n  --color-kgcraft-accent-foreground: var(--kgcraft-accent-foreground);\n  --color-kgcraft-muted-foreground: var(--kgcraft-muted-foreground);\n  --color-kgcraft-border: var(--kgcraft-border);\n  --color-kgcraft-input: var(--kgcraft-input);\n  --color-kgcraft-ring: var(--kgcraft-ring);\n}\n\n:root {\n  --kgcraft-background: oklch(1 0 0);\n  --kgcraft-primary: oklch(0.852 0.199 91.936);\n  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);\n  --kgcraft-secondary: oklch(0.967 0.001 286.375);\n  --kgcraft-secondary-foreground: oklch(0.21 0.006 285.885);\n  --kgcraft-accent: oklch(0.97 0 0);\n  --kgcraft-accent-foreground: oklch(0.205 0 0);\n  --kgcraft-muted-foreground: oklch(0.556 0 0);\n  --kgcraft-border: oklch(0.922 0 0);\n  --kgcraft-input: oklch(0.922 0 0);\n  --kgcraft-ring: oklch(0.708 0 0);\n}\n\n.dark {\n  --kgcraft-background: oklch(0.145 0 0);\n  --kgcraft-primary: oklch(0.795 0.184 86.047);\n  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);\n  --kgcraft-secondary: oklch(0.274 0.006 286.033);\n  --kgcraft-secondary-foreground: oklch(0.985 0 0);\n  --kgcraft-accent: oklch(0.269 0 0);\n  --kgcraft-accent-foreground: oklch(0.985 0 0);\n  --kgcraft-muted-foreground: oklch(0.708 0 0);\n  --kgcraft-border: oklch(1 0 0 / 10%);\n  --kgcraft-input: oklch(1 0 0 / 15%);\n  --kgcraft-ring: oklch(0.556 0 0);\n}\n"
+    }
+  ],
+  "docs": "React 18+ and Tailwind CSS 4 required. Import kgcraft-theme.css from your global Tailwind stylesheet. The accordion file keeps the legacy accordian.tsx filename and also exports Accordion."
+}

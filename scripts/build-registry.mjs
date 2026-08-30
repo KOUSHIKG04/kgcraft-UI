@@ -85,6 +85,35 @@ const definitions = [
       "lucide-react",
     ],
   },
+  {
+    name: "scramble-text",
+    title: "Scramble Text",
+    description:
+      "Text reveal animation with custom characters and hover replay.",
+    files: ["scramble-text/scramble-text.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "shimmer-text",
+    title: "Shimmer Text",
+    description: "Looping gradient shimmer with reduced-motion support.",
+    files: ["shimmer-text/shimmer-text.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "framer-motion"],
+  },
+  {
+    name: "search-bar",
+    title: "Search Bar",
+    description: "Controlled or uncontrolled search input with a clear action.",
+    files: ["search-bar/search-bar.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
+  },
+  {
+    name: "command-palette",
+    title: "Command Palette",
+    description: "Searchable command dialog with keyboard shortcut support.",
+    files: ["command-palette/command-palette.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
+  },
 ];
 const items = [];
 for (const def of definitions) {
@@ -169,7 +198,7 @@ const shadcnItems = items.map((item) => ({
     light: tokenValues(":root"),
     dark: tokenValues("\\.dark"),
   },
-  docs: `Import ${item.name === "button" ? "Button" : "Accordion"} from your configured UI directory's kgcraft-${item.name} module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.`,
+  docs: `Import ${item.title.replaceAll(" ", "")} from your configured UI directory's kgcraft-${item.name} module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.`,
 }));
 for (const directory of [
   path.join(root, "packages/registry/shadcn"),

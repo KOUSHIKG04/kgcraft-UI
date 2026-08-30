@@ -10,7 +10,16 @@ execFileSync(process.execPath, [path.join(root, "scripts/build-registry.mjs")]);
 const json = async (file) =>
   JSON.parse(await readFile(path.join(root, file), "utf8"));
 
-for (const name of ["button", "accordion"]) {
+const componentNames = [
+  "button",
+  "accordion",
+  "scramble-text",
+  "shimmer-text",
+  "search-bar",
+  "command-palette",
+];
+
+for (const name of componentNames) {
   test(`${name}: public shadcn payload is self-contained and theme-safe`, async () => {
     const item = await json(`apps/web/public/r/${name}.json`);
     assert.deepEqual(item, await json(`packages/registry/shadcn/${name}.json`));

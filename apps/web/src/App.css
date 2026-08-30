@@ -276,6 +276,36 @@ h1 {
   padding: 10px 15px;
   border-radius: 5px;
 }
+.text-effect-demo,
+.search-demo,
+.command-demo {
+  width: min(100%, 460px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.text-effect-demo > :first-child {
+  font-size: clamp(18px, 3vw, 27px);
+  font-weight: 650;
+  letter-spacing: -0.7px;
+}
+.text-effect-demo > span:last-child,
+.search-demo > span {
+  color: #8e8e8e;
+  font-size: 10px;
+}
+.search-demo > div {
+  background: #fff;
+}
+.command-demo kbd {
+  margin-left: 12px;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: #777;
+  font-size: 9px;
+}
 .doc-section {
   padding-top: 44px;
 }

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "command-palette",
+  "type": "registry:ui",
+  "title": "Command Palette",
+  "description": "Searchable command dialog with keyboard shortcut support.",
+  "dependencies": [
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2",
+    "lucide-react@^1.21.0"
+  ],
+  "files": [
+    {
+      "path": "registry/kgcraft/kgcraft-command-palette.tsx",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-command-palette.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Command, Search, X } from \"lucide-react\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface CommandPaletteItem {\n  id: string;\n  label: string;\n  description?: string;\n  shortcut?: string;\n  icon?: React.ReactNode;\n  onSelect?: () => void;\n}\n\nexport interface CommandPaletteProps {\n  items: CommandPaletteItem[];\n  open?: boolean;\n  defaultOpen?: boolean;\n  onOpenChange?: (open: boolean) => void;\n  placeholder?: string;\n  emptyMessage?: string;\n  className?: string;\n}\n\nexport function CommandPalette({\n  items,\n  open,\n  defaultOpen = false,\n  onOpenChange,\n  placeholder = \"Type a command or search…\",\n  emptyMessage = \"No commands found.\",\n  className,\n}: CommandPaletteProps) {\n  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);\n  const [query, setQuery] = React.useState(\"\");\n  const [activeIndex, setActiveIndex] = React.useState(0);\n  const isOpen = open ?? internalOpen;\n\n  const setOpen = React.useCallback(\n    (next: boolean) => {\n      if (open === undefined) setInternalOpen(next);\n      onOpenChange?.(next);\n      if (!next) setQuery(\"\");\n    },\n    [onOpenChange, open],\n  );\n\n  React.useEffect(() => {\n    function keydown(event: KeyboardEvent) {\n      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === \"k\") {\n        event.preventDefault();\n        setOpen(!isOpen);\n      }\n      if (event.key === \"Escape\" && isOpen) setOpen(false);\n    }\n    window.addEventListener(\"keydown\", keydown);\n    return () => window.removeEventListener(\"keydown\", keydown);\n  }, [isOpen, setOpen]);\n\n  const filtered = items.filter((item) =>\n    `${item.label} ${item.description ?? \"\"}`\n      .toLowerCase()\n      .includes(query.toLowerCase()),\n  );\n\n  function select(item: CommandPaletteItem | undefined) {\n    if (!item) return;\n    item.onSelect?.();\n    setOpen(false);\n  }\n\n  if (!isOpen) return null;\n\n  return (\n    <div\n      className=\"fixed inset-0 z-50 flex items-start justify-center bg-black/45 px-4 pt-[15vh]\"\n      role=\"presentation\"\n      onMouseDown={(event) => {\n        if (event.target === event.currentTarget) setOpen(false);\n      }}\n    >\n      <div\n        role=\"dialog\"\n        aria-modal=\"true\"\n        aria-label=\"Command palette\"\n        className={cn(\n          \"border-kgcraft-border bg-kgcraft-background w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl\",\n          className,\n        )}\n      >\n        <div className=\"border-kgcraft-border flex items-center gap-3 border-b px-4\">\n          <Search className=\"text-kgcraft-muted-foreground h-4 w-4\" />\n          <input\n            autoFocus\n            value={query}\n            onChange={(event) => {\n              setQuery(event.target.value);\n              setActiveIndex(0);\n            }}\n            onKeyDown={(event) => {\n              if (event.key === \"ArrowDown\") {\n                event.preventDefault();\n                setActiveIndex((index) =>\n                  Math.min(index + 1, Math.max(0, filtered.length - 1)),\n                );\n              }\n              if (event.key === \"ArrowUp\") {\n                event.preventDefault();\n                setActiveIndex((index) => Math.max(index - 1, 0));\n              }\n              if (event.key === \"Enter\") {\n                event.preventDefault();\n                select(filtered[activeIndex]);\n              }\n            }}\n            placeholder={placeholder}\n            className=\"placeholder:text-kgcraft-muted-foreground h-12 min-w-0 flex-1 bg-transparent text-sm outline-none\"\n          />\n          <button\n            type=\"button\"\n            onClick={() => setOpen(false)}\n            className=\"text-kgcraft-muted-foreground hover:text-foreground rounded-sm\"\n            aria-label=\"Close command palette\"\n          >\n            <X className=\"h-4 w-4\" />\n          </button>\n        </div>\n        <div className=\"max-h-80 overflow-y-auto p-2\" role=\"listbox\">\n          {filtered.length ? (\n            filtered.map((item, index) => (\n              <button\n                type=\"button\"\n                role=\"option\"\n                aria-selected={index === activeIndex}\n                key={item.id}\n                onMouseMove={() => setActiveIndex(index)}\n                onClick={() => select(item)}\n                className={cn(\n                  \"hover:bg-kgcraft-accent hover:text-kgcraft-accent-foreground flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm\",\n                  index === activeIndex && \"bg-kgcraft-accent text-kgcraft-accent-foreground\",\n                )}\n              >\n                <span className=\"text-kgcraft-muted-foreground grid h-5 w-5 place-items-center\">\n                  {item.icon ?? <Command className=\"h-4 w-4\" />}\n                </span>\n                <span className=\"min-w-0 flex-1\">\n                  <span className=\"block font-medium\">{item.label}</span>\n                  {item.description ? (\n                    <span className=\"text-kgcraft-muted-foreground block truncate text-xs\">\n                      {item.description}\n                    </span>\n                  ) : null}\n                </span>\n                {item.shortcut ? (\n                  <kbd className=\"border-kgcraft-border text-kgcraft-muted-foreground rounded border px-1.5 py-0.5 text-[10px]\">\n                    {item.shortcut}\n                  </kbd>\n                ) : null}\n              </button>\n            ))\n          ) : (\n            <p className=\"text-kgcraft-muted-foreground py-8 text-center text-sm\">\n              {emptyMessage}\n            </p>\n          )}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "registry/kgcraft/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ],
+  "docs": "Import CommandPalette from your configured UI directory's kgcraft-command-palette module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+  "cssVars": {
+    "theme": {
+      "color-kgcraft-background": "var(--kgcraft-background)",
+      "color-kgcraft-primary": "var(--kgcraft-primary)",
+      "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+      "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+      "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+      "color-kgcraft-accent": "var(--kgcraft-accent)",
+      "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+      "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+      "color-kgcraft-border": "var(--kgcraft-border)",
+      "color-kgcraft-input": "var(--kgcraft-input)",
+      "color-kgcraft-ring": "var(--kgcraft-ring)"
+    },
+    "light": {
+      "kgcraft-background": "oklch(1 0 0)",
+      "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+      "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+      "kgcraft-accent": "oklch(0.97 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+      "kgcraft-border": "oklch(0.922 0 0)",
+      "kgcraft-input": "oklch(0.922 0 0)",
+      "kgcraft-ring": "oklch(0.708 0 0)"
+    },
+    "dark": {
+      "kgcraft-background": "oklch(0.145 0 0)",
+      "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+      "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+      "kgcraft-accent": "oklch(0.269 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+      "kgcraft-border": "oklch(1 0 0 / 10%)",
+      "kgcraft-input": "oklch(1 0 0 / 15%)",
+      "kgcraft-ring": "oklch(0.556 0 0)"
+    }
+  }
+}

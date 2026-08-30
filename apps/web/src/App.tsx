@@ -1,9 +1,30 @@
 import { useEffect, useState } from "react";
-import { Accordion, Button } from "@repo/ui";
-import { ArrowUpRight, Check, Copy, Terminal } from "lucide-react";
+import {
+  Accordion,
+  Button,
+  CommandPalette,
+  ScrambleText,
+  SearchBar,
+  ShimmerText,
+} from "@repo/ui";
+import {
+  ArrowUpRight,
+  Check,
+  Copy,
+  FileText,
+  Home,
+  Settings,
+  Terminal,
+} from "lucide-react";
 import "./App.css";
 
-type ComponentName = "button" | "accordion";
+type ComponentName =
+  | "button"
+  | "accordion"
+  | "scramble-text"
+  | "shimmer-text"
+  | "search-bar"
+  | "command-palette";
 type Manager = "npm" | "pnpm" | "yarn" | "bun";
 type RegistryItem = {
   dependencies: string[];
@@ -70,6 +91,120 @@ const components = {
       ["className", "string", "—", "Additional classes on the trigger."],
     ],
   },
+  "scramble-text": {
+    title: "Scramble Text",
+    description:
+      "Reveal text through rapidly changing characters. Play it on mount or replay it whenever someone hovers.",
+    symbol: "ScrambleText",
+    usage: '<ScrambleText text="Hello World" speed={8} playOnHover />',
+    props: [
+      ["text", "string", "—", "The final text revealed by the animation."],
+      [
+        "speed",
+        "number",
+        "8",
+        "Characters revealed per second. Higher values are faster.",
+      ],
+      [
+        "chars",
+        "string",
+        "letters, numbers, symbols",
+        "Characters used while scrambling.",
+      ],
+      [
+        "playOnHover",
+        "boolean",
+        "false",
+        "Replay on hover instead of automatically on mount.",
+      ],
+      ["className", "string", "—", "Additional classes for the text element."],
+    ],
+  },
+  "shimmer-text": {
+    title: "Shimmer Text",
+    description:
+      "A polished moving highlight for headings, labels, and loading states, with reduced-motion support built in.",
+    symbol: "ShimmerText",
+    usage: '<ShimmerText text="Building thoughtful interfaces" duration={2} />',
+    props: [
+      ["text", "string", "—", "The text that receives the shimmer effect."],
+      ["duration", "number", "2", "Seconds for one shimmer pass."],
+      ["repeatDelay", "number", "0.5", "Pause in seconds between passes."],
+      [
+        "className",
+        "string",
+        "—",
+        "Additional classes for typography and layout.",
+      ],
+    ],
+  },
+  "search-bar": {
+    title: "Search Bar",
+    description:
+      "A focused search field with controlled and uncontrolled modes, a clear action, and forwarded input ref.",
+    symbol: "SearchBar",
+    usage:
+      '<SearchBar placeholder="Search components…" onChange={(event) => console.log(event.target.value)} />',
+    props: [
+      ["value", "string | number", "—", "Controlled input value."],
+      [
+        "defaultValue",
+        "string | number",
+        '""',
+        "Initial value when uncontrolled.",
+      ],
+      [
+        "onChange",
+        "ChangeEventHandler",
+        "—",
+        "Runs whenever the input value changes.",
+      ],
+      ["onClear", "() => void", "—", "Runs when the clear button is pressed."],
+      [
+        "containerClassName",
+        "string",
+        "—",
+        "Classes for the outer search container.",
+      ],
+      ["placeholder", "string", '"Search…"', "Placeholder shown in the input."],
+    ],
+  },
+  "command-palette": {
+    title: "Command Palette",
+    description:
+      "A searchable keyboard-first command dialog. Open it with Ctrl+K or Command+K and connect each item to your own action.",
+    symbol: "CommandPalette",
+    usage:
+      '<CommandPalette defaultOpen items={[{ id: "home", label: "Go home", onSelect: () => navigate("/") }]} />',
+    props: [
+      [
+        "items",
+        "CommandPaletteItem[]",
+        "—",
+        "Commands displayed and searched in the palette.",
+      ],
+      ["open", "boolean", "—", "Controlled open state."],
+      ["defaultOpen", "boolean", "false", "Initial state when uncontrolled."],
+      [
+        "onOpenChange",
+        "(open: boolean) => void",
+        "—",
+        "Runs when open state changes.",
+      ],
+      [
+        "placeholder",
+        "string",
+        '"Type a command or search…"',
+        "Search field placeholder.",
+      ],
+      [
+        "emptyMessage",
+        "string",
+        '"No commands found."',
+        "Message shown for zero matches.",
+      ],
+    ],
+  },
 } as const;
 const commands: Record<Manager, string> = {
   npm: "npx shadcn@latest",
@@ -112,9 +247,12 @@ function CodeBlock({ code, label }: { code: string; label: string }) {
 }
 
 export default function App() {
+  const requested = new URLSearchParams(window.location.search).get(
+    "component",
+  );
   const name: ComponentName =
-    new URLSearchParams(window.location.search).get("component") === "accordion"
-      ? "accordion"
+    requested && requested in components
+      ? (requested as ComponentName)
       : "button";
   const component = components[name];
   const [method, setMethod] = useState<"CLI" | "Manual">("CLI");
@@ -125,6 +263,8 @@ export default function App() {
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [clicks, setClicks] = useState(0);
+  const [search, setSearch] = useState("");
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const registryUrl = `${registryBase}/${name}.json`;
   useEffect(() => {
     document.title = `${component.title} — KGCraft UI`;
@@ -197,7 +337,7 @@ export default function App() {
             Getting started <ArrowUpRight size={13} />
           </a>
           <p className="nav-label component-label">
-            COMPONENTS <span>02</span>
+            COMPONENTS <span>06</span>
           </p>
           <nav aria-label="Components">
             {(Object.keys(components) as ComponentName[]).map((key) => (
@@ -250,7 +390,7 @@ export default function App() {
             </div>
             {preview === "Preview" ? (
               <div className="preview-canvas">
-                {name === "button" ? (
+                {name === "button" && (
                   <div className="button-demo">
                     <Button
                       variant="briskPrimary"
@@ -276,7 +416,8 @@ export default function App() {
                         : "Hover or click to try it out"}
                     </span>
                   </div>
-                ) : (
+                )}
+                {name === "accordion" && (
                   <div className="accordion-demo">
                     <Accordion
                       content="Absolutely. Install the source with shadcn, then change anything you need."
@@ -287,6 +428,75 @@ export default function App() {
                     <Accordion content="The component, supporting files, dependencies, and theme variables.">
                       What does the CLI install?
                     </Accordion>
+                  </div>
+                )}
+                {name === "scramble-text" && (
+                  <div className="text-effect-demo">
+                    <ScrambleText
+                      text="Geist meets thoughtful motion"
+                      speed={8}
+                      playOnHover
+                    />
+                    <span>Hover the text to replay</span>
+                  </div>
+                )}
+                {name === "shimmer-text" && (
+                  <div className="text-effect-demo">
+                    <ShimmerText
+                      text="Building thoughtful interfaces"
+                      className="text-2xl font-semibold"
+                    />
+                    <span>The animation respects reduced-motion settings</span>
+                  </div>
+                )}
+                {name === "search-bar" && (
+                  <div className="search-demo">
+                    <SearchBar
+                      value={search}
+                      onChange={(event) => setSearch(event.target.value)}
+                      onClear={() => setSearch("")}
+                      placeholder="Search components…"
+                    />
+                    <span role="status">
+                      {search
+                        ? `Searching for “${search}”`
+                        : "Start typing to search"}
+                    </span>
+                  </div>
+                )}
+                {name === "command-palette" && (
+                  <div className="command-demo">
+                    <Button
+                      variant="outline"
+                      onClick={() => setPaletteOpen(true)}
+                    >
+                      Open command palette <kbd>Ctrl K</kbd>
+                    </Button>
+                    <CommandPalette
+                      open={paletteOpen}
+                      onOpenChange={setPaletteOpen}
+                      items={[
+                        {
+                          id: "home",
+                          label: "Go home",
+                          description: "Return to the KGCraft overview",
+                          icon: <Home size={16} />,
+                          shortcut: "G H",
+                        },
+                        {
+                          id: "docs",
+                          label: "Open documentation",
+                          description: "Read component installation guides",
+                          icon: <FileText size={16} />,
+                        },
+                        {
+                          id: "settings",
+                          label: "Open settings",
+                          description: "Change your workspace preferences",
+                          icon: <Settings size={16} />,
+                        },
+                      ]}
+                    />
                   </div>
                 )}
               </div>
@@ -461,9 +671,8 @@ export default function App() {
               </table>
             </div>
             <p className="install-note">
-              {name === "button"
-                ? "Also accepts native button attributes and a forwarded button ref."
-                : "Also accepts native div attributes (except content) and a forwarded trigger ref. The legacy Accordian export is still available."}
+              These are source components. After shadcn installs them, read the
+              generated file, change a prop, and experiment with the behavior.
             </p>
           </section>
           <footer className="doc-footer">
