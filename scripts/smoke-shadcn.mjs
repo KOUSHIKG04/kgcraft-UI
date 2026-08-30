@@ -7,6 +7,7 @@ import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+const remoteBase = process.argv[2]?.replace(/\/$/, "");
 const cwd = await mkdtemp(path.join(tmpdir(), "kgcraft-shadcn-consumer-"));
 console.log(`Independent shadcn consumer: ${cwd}`);
 const write = async (name, content) => {
@@ -38,11 +39,13 @@ const npm = (command) =>
       ])
     : run("npm", command.split(" "));
 
-await run(
-  process.execPath,
-  [path.join(root, "scripts/build-registry.mjs")],
-  root,
-);
+if (!remoteBase) {
+  await run(
+    process.execPath,
+    [path.join(root, "scripts/build-registry.mjs")],
+    root,
+  );
+}
 await write("package.json", {
   name: "kgcraft-shadcn-consumer",
   private: true,
@@ -141,9 +144,11 @@ const server = createServer(async (req, res) => {
     res.end();
   }
 });
-await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+if (!remoteBase) {
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+}
 try {
-  const base = `http://127.0.0.1:${server.address().port}/r`;
+  const base = remoteBase ?? `http://127.0.0.1:${server.address().port}/r`;
   await npm(
     "install --no-audit --no-fund --fetch-retries=0 --fetch-timeout=60000",
   );
@@ -174,10 +179,12 @@ try {
     ),
     /use client/,
   );
-  assert.ok(
-    requests.includes("/r/button.json") &&
-      requests.includes("/r/accordion.json"),
-  );
+  if (!remoteBase) {
+    assert.ok(
+      requests.includes("/r/button.json") &&
+        requests.includes("/r/accordion.json"),
+    );
+  }
   assert.ok(!(await readdir(cwd)).includes("kgcraft-ui.json"));
   await npm("run build");
   const assets = await readdir(path.join(cwd, "dist/assets"));
@@ -228,8 +235,10 @@ try {
   );
   console.log(`Consumer retained: ${cwd}`);
 } finally {
-  await new Promise((resolve) => {
-    server.close(resolve);
-    server.closeAllConnections();
-  });
+  if (!remoteBase) {
+    await new Promise((resolve) => {
+      server.close(resolve);
+      server.closeAllConnections();
+    });
+  }
 }

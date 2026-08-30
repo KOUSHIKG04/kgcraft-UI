@@ -10,14 +10,14 @@ Use a React + Tailwind CSS 4 app. Initialize shadcn in that app if necessary:
 npx shadcn@latest init
 ```
 
-Start this repository's documentation site with `pnpm web:dev`. Then run the install command shown on its component page in your receiving app:
+Run the install command from the component page in your receiving app:
 
 ```sh
-npx shadcn@latest add http://localhost:5173/r/button.json
-npx shadcn@latest add http://localhost:5173/r/accordion.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/button.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/accordion.json
 ```
 
-Use Vite's actual port if different. After deployment, replace localhost with the real HTTPS site URL. The documentation page does this automatically. No public deployment is implied by these examples.
+Browse the live component documentation at [kgcraft-ui-web.vercel.app](https://kgcraft-ui-web.vercel.app/). The documentation page automatically uses its current origin in its copyable commands.
 
 ```tsx
 import { Button } from "@/components/ui/kgcraft-button";
@@ -39,7 +39,7 @@ pnpm shadcn:test
 pnpm --filter web build
 ```
 
-The smoke test uses the real `shadcn@latest` CLI in a temporary app outside this monorepo and verifies installation, custom aliases, CSS merging, TypeScript and a production build. It needs npm network access and retains the temporary app for inspection.
+The smoke test uses the real `shadcn@latest` CLI in a temporary app outside this monorepo and verifies installation, custom aliases, CSS merging, TypeScript and a production build. It needs npm network access and retains the temporary app for inspection. Pass a registry base URL to test a deployment, for example `node scripts/smoke-shadcn.mjs https://kgcraft-ui-web.vercel.app/r`.
 
 Edit components in `packages/ui/src`, then run `pnpm registry:build`. Generated registry payloads should not be edited by hand.
 

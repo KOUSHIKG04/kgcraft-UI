@@ -14,36 +14,32 @@ Existing shadcn projects can skip this step. The standard `components.json` cont
 
 ## 2. Install from the registry URL
 
-Start the KGCraft documentation site locally:
+The public registry is hosted with the component documentation at [kgcraft-ui-web.vercel.app](https://kgcraft-ui-web.vercel.app/). Run these commands **in the receiving application**:
+
+```sh
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/button.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/accordion.json
+```
+
+For local registry development, start this repository and use the URL printed by Vite:
 
 ```sh
 pnpm install
 pnpm web:dev
-```
-
-Use the URL printed by Vite. With its usual port 5173, run these commands **in the receiving application**:
-
-```sh
 npx shadcn@latest add http://localhost:5173/r/button.json
 npx shadcn@latest add http://localhost:5173/r/accordion.json
 ```
 
 These are real shadcn URL installations. Localhost works only on the computer running the registry server; it is not a public sharing URL.
 
-Once the documentation app is deployed, replace `http://localhost:5173` with its real HTTPS origin:
-
-```sh
-npx shadcn@latest add https://YOUR-ACTUAL-HOST/r/button.json
-```
-
 The documentation page uses its current origin, so its copyable install command automatically uses the deployed URL. Set `VITE_REGISTRY_URL` at build time only when the registry is hosted at a different URL. A separate registry host must permit cross-origin reads for the page's source/manual panels.
 
 ### Other package managers
 
 ```sh
-pnpm dlx shadcn@latest add http://localhost:5173/r/button.json
-yarn dlx shadcn@latest add http://localhost:5173/r/button.json
-bunx --bun shadcn@latest add http://localhost:5173/r/button.json
+pnpm dlx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/button.json
+yarn dlx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/button.json
+bunx --bun shadcn@latest add https://kgcraft-ui-web.vercel.app/r/button.json
 ```
 
 The Yarn command requires modern Yarn with `dlx` support.
@@ -104,7 +100,7 @@ pnpm registry:build
 
 The `accordian.json` URL also works as a compatibility alias. Public shadcn payloads use flat `/r/*.json` URLs; do not substitute the legacy `/r/items/*.json` payloads.
 
-Edit the UI source and regenerate; do not edit generated JSON by hand. The web app's dev/build commands generate the assets explicitly before starting Vite. Deploy `apps/web/dist` to a static host after its production build, preserving the `/r` files. No public deployment has been performed automatically.
+Edit the UI source and regenerate; do not edit generated JSON by hand. The web app's dev/build commands generate the assets explicitly before starting Vite. Vercel deploys `apps/web/dist` and preserves the `/r` files.
 
 ## Verification
 
@@ -114,6 +110,6 @@ pnpm shadcn:test
 pnpm --filter web build
 ```
 
-The integration test installs `shadcn@latest` in a disposable app outside this monorepo, serves the generated JSON over localhost, and runs the real shadcn `add` command. It checks dependency installation, both components, native theme merging, existing component/theme preservation, custom UI aliases, TypeScript, and a Vite production build. It requires network access and retains the temporary app for inspection.
+The integration test installs `shadcn@latest` in a disposable app outside this monorepo, serves the generated JSON over localhost, and runs the real shadcn `add` command. It checks dependency installation, both components, native theme merging, existing component/theme preservation, custom UI aliases, TypeScript, and a Vite production build. It requires network access and retains the temporary app for inspection. To verify the live deployment, run `node scripts/smoke-shadcn.mjs https://kgcraft-ui-web.vercel.app/r`.
 
 This format follows the [official shadcn registry specification](https://ui.shadcn.com/docs/registry/registry-item-json). The previous standalone installer remains available only as an optional [legacy workflow](LEGACY_CLI.md).
