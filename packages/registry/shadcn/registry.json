@@ -1,0 +1,157 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "kgcraft-ui",
+  "homepage": "https://github.com/KOUSHIKG04/kgcraft-UI",
+  "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button with primary, secondary, outline, and brisk variants.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.0.2"
+      ],
+      "files": [
+        {
+          "path": "registry/kgcraft/kgcraft-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-button.tsx",
+          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { buttonVariants } from \"./kgcraft-button-variants\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, ...props }, ref) => {\n    return (\n      <button\n        className={cn(buttonVariants({ variant, size }), className)}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\n\nButton.displayName = \"Button\";\n"
+        },
+        {
+          "path": "registry/kgcraft/kgcraft-button-variants.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-button-variants.tsx",
+          "content": "import { cva } from \"class-variance-authority\";\n\nexport const buttonVariants = cva(\n  \"focus-visible:ring-kgcraft-ring hover:-translate-x-0.1 inline-flex cursor-pointer items-center justify-center rounded-md text-sm font-medium transition transition-colors duration-150 text-shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-98 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        primary: \"bg-kgcraft-primary text-kgcraft-secondary-foreground hover:bg-kgcraft-primary/90\",\n        secondary:\n          \"bg-kgcraft-secondary text-kgcraft-secondary-foreground hover:bg-kgcraft-secondary/80\",\n        outline:\n          \"border-kgcraft-input bg-kgcraft-background hover:bg-kgcraft-accent hover:text-kgcraft-accent-foreground border\",\n        briskPrimary:\n          \"text-kgcraft-secondary-foreground after=[''] bg-kgcraft-primary relative overflow-hidden after:absolute after:-top-5 after:-left-3 after:h-[100px] after:w-[40px] after:-translate-x-20 after:rotate-10 after:bg-neutral-50/22 after:[mask-image:linear-gradient(to_right,transparent,black_40%,black_60%,transparent)] after:backdrop-blur-[0.15px] after:transition-all after:duration-750 hover:after:translate-x-[350%]\",\n        briskSecondary:\n          \"border-kgcraft-input text-kgcraft-secondary-foreground after=[''] bg-kgcraft-secondary relative overflow-hidden after:absolute after:-top-5 after:-left-3 after:h-[100px] after:w-[40px] after:-translate-x-20 after:rotate-10 after:bg-neutral-400/22 after:[mask-image:linear-gradient(to_right,transparent,black_40%,black_60%,transparent)] after:transition-all after:duration-1050 hover:after:translate-x-[350%]\",\n      },\n      size: {\n        sm: \"h-8 rounded-md px-3\",\n        md: \"h-10 px-4 py-2\",\n        lg: \"h-11 px-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"primary\",\n      size: \"md\",\n    },\n  },\n);\n"
+        },
+        {
+          "path": "registry/kgcraft/kgcraft-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-utils.ts",
+          "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+        }
+      ],
+      "docs": "Import Button from your configured UI directory's kgcraft-button module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+      "cssVars": {
+        "theme": {
+          "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-primary": "var(--kgcraft-primary)",
+          "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+          "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+          "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+          "color-kgcraft-accent": "var(--kgcraft-accent)",
+          "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+          "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+          "color-kgcraft-border": "var(--kgcraft-border)",
+          "color-kgcraft-input": "var(--kgcraft-input)",
+          "color-kgcraft-ring": "var(--kgcraft-ring)"
+        },
+        "light": {
+          "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+          "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+          "kgcraft-accent": "oklch(0.97 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+          "kgcraft-border": "oklch(0.922 0 0)",
+          "kgcraft-input": "oklch(0.922 0 0)",
+          "kgcraft-ring": "oklch(0.708 0 0)"
+        },
+        "dark": {
+          "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+          "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+          "kgcraft-accent": "oklch(0.269 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+          "kgcraft-border": "oklch(1 0 0 / 10%)",
+          "kgcraft-input": "oklch(1 0 0 / 15%)",
+          "kgcraft-ring": "oklch(0.556 0 0)"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Animated accordion with customizable icons and placement.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.0.2",
+        "framer-motion@^12.42.0",
+        "lucide-react@^1.21.0"
+      ],
+      "files": [
+        {
+          "path": "registry/kgcraft/kgcraft-accordion.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-accordion.tsx",
+          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { accordianVariants } from \"./kgcraft-accordion-variant\";\nimport { cn } from \"./kgcraft-utils\";\nimport { ChevronDown, ChevronUp, Minus, Plus } from \"lucide-react\";\nimport { motion, AnimatePresence } from \"framer-motion\";\n\nexport interface AccordianProps\n  extends\n    Omit<React.HTMLAttributes<HTMLDivElement>, \"content\">,\n    VariantProps<typeof accordianVariants> {\n  iconPosition?: \"left\" | \"right\";\n  iconType?: \"chevron\" | \"plus-minus\";\n  content?: React.ReactNode;\n}\n\nexport const Accordian = React.forwardRef<HTMLDivElement, AccordianProps>(\n  (\n    {\n      className,\n      variant,\n      iconPosition = \"right\",\n      iconType = \"chevron\",\n      children,\n      content,\n      ...props\n    },\n    ref,\n  ) => {\n    const [isOpen, setIsOpen] = React.useState(false);\n    // Helper to render the correct icon based on the type and open state\n    const renderIcon = () => {\n      if (iconType === \"plus-minus\") {\n        return isOpen ? (\n          <Minus className=\"h-4 w-4 transition-transform duration-200\" />\n        ) : (\n          <Plus className=\"h-4 w-4 transition-transform duration-200\" />\n        );\n      }\n      // Default to chevron\n      return isOpen ? (\n        <ChevronUp className=\"h-4 w-4 transition-transform duration-200\" />\n      ) : (\n        <ChevronDown className=\"h-4 w-4 transition-transform duration-200\" />\n      );\n    };\n    return (\n      <div className=\"w-full max-w-xl\">\n        <div\n          className={cn(\n            accordianVariants({ variant }),\n            // Toggle order of icon and text using CSS flex-row-reverse\n            iconPosition === \"left\" ? \"flex-row-reverse justify-end gap-3\" : \"\",\n            className,\n          )}\n          ref={ref}\n          onClick={() => setIsOpen(!isOpen)}\n          {...props}\n        >\n          <span>{children || \"Accordion Header\"}</span>\n\n          <div className=\"text-kgcraft-muted-foreground shrink-0\">{renderIcon()}</div>\n        </div>\n        {/* AnimatePresence handles animating elements when they mount and unmount */}\n        <AnimatePresence initial={false}>\n          {isOpen && (\n            <motion.div\n              initial=\"collapsed\"\n              animate=\"open\"\n              exit=\"collapsed\"\n              variants={{\n                open: { opacity: 1, height: \"auto\" },\n                collapsed: { opacity: 0, height: 0 },\n              }}\n              transition={{ duration: 0.25, ease: \"easeInOut\" }}\n              className=\"overflow-hidden\" // Prevents content from overflowing during height transitions\n            >\n              <div className=\"text-kgcraft-muted-foreground pt-2 pb-4 text-sm leading-relaxed\">\n                {content || \"Accordion Content goes here.\"}\n              </div>\n            </motion.div>\n          )}\n        </AnimatePresence>\n      </div>\n    );\n  },\n);\nAccordian.displayName = \"Accordian\";\n\n// Keep the original spelling compatible with existing consumers.\nexport { Accordian as Accordion };\nexport type AccordionProps = AccordianProps;\n"
+        },
+        {
+          "path": "registry/kgcraft/kgcraft-accordion-variant.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-accordion-variant.tsx",
+          "content": "import { cva } from \"class-variance-authority\";\n\nexport const accordianVariants = cva(\n  \"flex cursor-pointer items-center justify-between py-3 font-medium transition-all select-none hover:underline\",\n  {\n    variants: {\n      variant: {\n        default: \"border-kgcraft-border border-b\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\n"
+        },
+        {
+          "path": "registry/kgcraft/kgcraft-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-utils.ts",
+          "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+        }
+      ],
+      "docs": "Import Accordion from your configured UI directory's kgcraft-accordion module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+      "cssVars": {
+        "theme": {
+          "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-primary": "var(--kgcraft-primary)",
+          "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+          "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+          "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+          "color-kgcraft-accent": "var(--kgcraft-accent)",
+          "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+          "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+          "color-kgcraft-border": "var(--kgcraft-border)",
+          "color-kgcraft-input": "var(--kgcraft-input)",
+          "color-kgcraft-ring": "var(--kgcraft-ring)"
+        },
+        "light": {
+          "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+          "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+          "kgcraft-accent": "oklch(0.97 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+          "kgcraft-border": "oklch(0.922 0 0)",
+          "kgcraft-input": "oklch(0.922 0 0)",
+          "kgcraft-ring": "oklch(0.708 0 0)"
+        },
+        "dark": {
+          "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+          "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+          "kgcraft-accent": "oklch(0.269 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+          "kgcraft-border": "oklch(1 0 0 / 10%)",
+          "kgcraft-input": "oklch(1 0 0 / 15%)",
+          "kgcraft-ring": "oklch(0.556 0 0)"
+        }
+      }
+    }
+  ]
+}

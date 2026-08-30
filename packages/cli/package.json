@@ -1,15 +1,24 @@
 {
-  "name": "@repo/cli",
-  "version": "0.1.0",
+  "name": "kgcraft-ui-cli",
+  "version": "0.2.0",
+  "description": "Install editable KGCraft UI components in React projects",
   "type": "module",
   "bin": {
+    "kgcraft-ui": "./dist/index.js",
     "my-ui": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "registry"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts"
+    "build": "node ../../scripts/build-registry.mjs && tsup src/index.ts --format esm --dts",
+    "check-types": "tsc --noEmit",
+    "test": "pnpm build && node --test test/*.test.mjs",
+    "prepack": "pnpm build"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

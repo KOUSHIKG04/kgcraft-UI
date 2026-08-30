@@ -1,18 +1,22 @@
 {
   "name": "kgcraft-ui",
   "private": true,
-   "scripts": {
+  "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    
     "story": "pnpm --filter @repo/ui storybook",
     "storybook:build": "pnpm --filter @repo/ui build-storybook",
-    "web:dev": "pnpm --filter web dev"
+    "web:dev": "pnpm --filter web dev",
+    "registry:build": "node scripts/build-registry.mjs",
+    "registry:test": "node --test scripts/registry.test.mjs",
+    "shadcn:test": "node scripts/smoke-shadcn.mjs",
+    "cli:build": "pnpm --filter kgcraft-ui-cli build",
+    "cli:test": "pnpm --filter kgcraft-ui-cli test",
+    "cli:pack": "pnpm --dir packages/cli pack --pack-destination ../../artifacts"
   },
-
   "devDependencies": {
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.8.0",

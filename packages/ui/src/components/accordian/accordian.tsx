@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { type VariantProps } from "class-variance-authority";
 import { accordianVariants } from "./accordian-variant";
@@ -7,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export interface AccordianProps
   extends
-    Omit<React.HTMLAttributes<HTMLDivElement>, "content">, 
+    Omit<React.HTMLAttributes<HTMLDivElement>, "content">,
     VariantProps<typeof accordianVariants> {
   iconPosition?: "left" | "right";
   iconType?: "chevron" | "plus-minus";
@@ -86,3 +88,7 @@ export const Accordian = React.forwardRef<HTMLDivElement, AccordianProps>(
   },
 );
 Accordian.displayName = "Accordian";
+
+// Keep the original spelling compatible with existing consumers.
+export { Accordian as Accordion };
+export type AccordionProps = AccordianProps;

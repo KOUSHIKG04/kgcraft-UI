@@ -135,7 +135,7 @@ const RotateEyeOptimised = () => {
           transition={{ duration: 0.2, ease: "easeInOut" }}
           style={{ transformOrigin: "left bottom" }}
           className={cn(
-            "border-input text-secondary-foreground after=[''] bg-secondary relative overflow-hidden after:absolute after:-top-5 after:-left-3 after:h-[100px] after:w-[40px] after:-translate-x-20 after:rotate-10 after:bg-neutral-400/22 after:[mask-image:linear-gradient(to_right,transparent,black_40%,black_60%,transparent)] after:transition-all after:duration-1050 hover:after:translate-x-[650%]",
+            "border-input text-secondary-foreground after=[''] bg-secondary relative overflow-hidden after:absolute after:-top-5 after:-left-3 after:h-[100px] after:w-[40px] after:-translate-x-20 after:rotate-10 after:bg-neutral-400/22 after:mask-[linear-gradient(to_right,transparent,black_40%,black_60%,transparent)] after:transition-all after:duration-1050 hover:after:translate-x-[550%]",
             "transition-scale absolute inset-0 z-20 flex cursor-pointer items-center justify-center rounded-xs bg-neutral-300 text-black shadow-xl duration-100 active:scale-103",
           )}
         >

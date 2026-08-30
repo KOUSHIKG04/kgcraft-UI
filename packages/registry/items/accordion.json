@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "accordian",
+  "name": "accordion",
   "type": "registry:ui",
   "title": "Accordion",
   "description": "Animated accordion with customizable icons and placement.",

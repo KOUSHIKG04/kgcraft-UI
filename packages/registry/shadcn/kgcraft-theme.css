@@ -1,0 +1,42 @@
+/* Generated KGCraft UI theme. Override --kgcraft-* to customize. */
+@theme inline {
+  --color-kgcraft-background: var(--kgcraft-background);
+  --color-kgcraft-primary: var(--kgcraft-primary);
+  --color-kgcraft-primary-foreground: var(--kgcraft-primary-foreground);
+  --color-kgcraft-secondary: var(--kgcraft-secondary);
+  --color-kgcraft-secondary-foreground: var(--kgcraft-secondary-foreground);
+  --color-kgcraft-accent: var(--kgcraft-accent);
+  --color-kgcraft-accent-foreground: var(--kgcraft-accent-foreground);
+  --color-kgcraft-muted-foreground: var(--kgcraft-muted-foreground);
+  --color-kgcraft-border: var(--kgcraft-border);
+  --color-kgcraft-input: var(--kgcraft-input);
+  --color-kgcraft-ring: var(--kgcraft-ring);
+}
+
+:root {
+  --kgcraft-background: oklch(1 0 0);
+  --kgcraft-primary: oklch(0.852 0.199 91.936);
+  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);
+  --kgcraft-secondary: oklch(0.967 0.001 286.375);
+  --kgcraft-secondary-foreground: oklch(0.21 0.006 285.885);
+  --kgcraft-accent: oklch(0.97 0 0);
+  --kgcraft-accent-foreground: oklch(0.205 0 0);
+  --kgcraft-muted-foreground: oklch(0.556 0 0);
+  --kgcraft-border: oklch(0.922 0 0);
+  --kgcraft-input: oklch(0.922 0 0);
+  --kgcraft-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --kgcraft-background: oklch(0.145 0 0);
+  --kgcraft-primary: oklch(0.795 0.184 86.047);
+  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);
+  --kgcraft-secondary: oklch(0.274 0.006 286.033);
+  --kgcraft-secondary-foreground: oklch(0.985 0 0);
+  --kgcraft-accent: oklch(0.269 0 0);
+  --kgcraft-accent-foreground: oklch(0.985 0 0);
+  --kgcraft-muted-foreground: oklch(0.708 0 0);
+  --kgcraft-border: oklch(1 0 0 / 10%);
+  --kgcraft-input: oklch(1 0 0 / 15%);
+  --kgcraft-ring: oklch(0.556 0 0);
+}

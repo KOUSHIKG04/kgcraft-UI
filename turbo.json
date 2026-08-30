@@ -3,8 +3,14 @@
   "ui": "tui",
   "tasks": {
     "build": {
+      "env": ["VITE_REGISTRY_URL", "BASE_URL"],
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*",
+        "$TURBO_ROOT$/scripts/build-registry.mjs",
+        "$TURBO_ROOT$/packages/ui/src/**"
+      ],
       "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**", "dist/**"]
     },
     "lint": {

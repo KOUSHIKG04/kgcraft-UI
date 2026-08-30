@@ -7,8 +7,10 @@ import path from "path";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
+    // Workspace UI and motion packages must share the app's React instance.
+    dedupe: ["react", "react-dom"],
     alias: {
-      "@": path.resolve(__dirname, "./src"), 
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 });

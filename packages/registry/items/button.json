@@ -3,18 +3,33 @@
   "name": "button",
   "type": "registry:ui",
   "title": "Button",
-  "description": "A standard button component with variants.",
-  "dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+  "description": "Button with primary, secondary, outline, and brisk variants.",
+  "dependencies": [
+    "class-variance-authority@^0.7.1",
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2"
+  ],
   "files": [
     {
       "path": "components/ui/button.tsx",
       "type": "registry:ui",
-      "content": "import * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { buttonVariants } from \"./button-variants\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, ...props }, ref) => {\n    return (\n      <button\n        className={cn(buttonVariants({ variant, size }), className)}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\n\nButton.displayName = \"Button\";"
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { buttonVariants } from \"./button-variants\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface ButtonProps\n  extends\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, ...props }, ref) => {\n    return (\n      <button\n        className={cn(buttonVariants({ variant, size }), className)}\n        ref={ref}\n        {...props}\n      />\n    );\n  },\n);\n\nButton.displayName = \"Button\";\n"
     },
     {
-      "path": "components/ui/button-variants.ts",
+      "path": "components/ui/button-variants.tsx",
       "type": "registry:ui",
-      "content": "import { cva } from \"class-variance-authority\";\n\nexport const buttonVariants = cva(\n  \"focus-visible:ring-ring inline-flex cursor-pointer items-center justify-center rounded-md text-sm font-medium transition-colors text-shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        secondary: \"bg-secondary text-secondary-foreground hover:bg-secondary/80\",\n        outline: \"border-input bg-background hover:bg-accent hover:text-accent-foreground border\",\n      },\n      size: {\n        sm: \"h-8 rounded-md px-3\",\n        md: \"h-10 px-4 py-2\",\n        lg: \"h-11 px-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"md\",\n    },\n  },\n);"
+      "content": "import { cva } from \"class-variance-authority\";\n\nexport const buttonVariants = cva(\n  \"focus-visible:ring-kgcraft-ring hover:-translate-x-0.1 inline-flex cursor-pointer items-center justify-center rounded-md text-sm font-medium transition transition-colors duration-150 text-shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-98 disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        primary: \"bg-kgcraft-primary text-kgcraft-secondary-foreground hover:bg-kgcraft-primary/90\",\n        secondary:\n          \"bg-kgcraft-secondary text-kgcraft-secondary-foreground hover:bg-kgcraft-secondary/80\",\n        outline:\n          \"border-kgcraft-input bg-kgcraft-background hover:bg-kgcraft-accent hover:text-kgcraft-accent-foreground border\",\n        briskPrimary:\n          \"text-kgcraft-secondary-foreground after=[''] bg-kgcraft-primary relative overflow-hidden after:absolute after:-top-5 after:-left-3 after:h-[100px] after:w-[40px] after:-translate-x-20 after:rotate-10 after:bg-neutral-50/22 after:[mask-image:linear-gradient(to_right,transparent,black_40%,black_60%,transparent)] after:backdrop-blur-[0.15px] after:transition-all after:duration-750 hover:after:translate-x-[350%]\",\n        briskSecondary:\n          \"border-kgcraft-input text-kgcraft-secondary-foreground after=[''] bg-kgcraft-secondary relative overflow-hidden after:absolute after:-top-5 after:-left-3 after:h-[100px] after:w-[40px] after:-translate-x-20 after:rotate-10 after:bg-neutral-400/22 after:[mask-image:linear-gradient(to_right,transparent,black_40%,black_60%,transparent)] after:transition-all after:duration-1050 hover:after:translate-x-[350%]\",\n      },\n      size: {\n        sm: \"h-8 rounded-md px-3\",\n        md: \"h-10 px-4 py-2\",\n        lg: \"h-11 px-8\",\n      },\n    },\n    defaultVariants: {\n      variant: \"primary\",\n      size: \"md\",\n    },\n  },\n);\n"
+    },
+    {
+      "path": "components/ui/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    },
+    {
+      "path": "components/ui/kgcraft-theme.css",
+      "type": "registry:ui",
+      "content": "/* Generated KGCraft UI theme. Override --kgcraft-* to customize. */\n@theme inline {\n  --color-kgcraft-background: var(--kgcraft-background);\n  --color-kgcraft-primary: var(--kgcraft-primary);\n  --color-kgcraft-primary-foreground: var(--kgcraft-primary-foreground);\n  --color-kgcraft-secondary: var(--kgcraft-secondary);\n  --color-kgcraft-secondary-foreground: var(--kgcraft-secondary-foreground);\n  --color-kgcraft-accent: var(--kgcraft-accent);\n  --color-kgcraft-accent-foreground: var(--kgcraft-accent-foreground);\n  --color-kgcraft-muted-foreground: var(--kgcraft-muted-foreground);\n  --color-kgcraft-border: var(--kgcraft-border);\n  --color-kgcraft-input: var(--kgcraft-input);\n  --color-kgcraft-ring: var(--kgcraft-ring);\n}\n\n:root {\n  --kgcraft-background: oklch(1 0 0);\n  --kgcraft-primary: oklch(0.852 0.199 91.936);\n  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);\n  --kgcraft-secondary: oklch(0.967 0.001 286.375);\n  --kgcraft-secondary-foreground: oklch(0.21 0.006 285.885);\n  --kgcraft-accent: oklch(0.97 0 0);\n  --kgcraft-accent-foreground: oklch(0.205 0 0);\n  --kgcraft-muted-foreground: oklch(0.556 0 0);\n  --kgcraft-border: oklch(0.922 0 0);\n  --kgcraft-input: oklch(0.922 0 0);\n  --kgcraft-ring: oklch(0.708 0 0);\n}\n\n.dark {\n  --kgcraft-background: oklch(0.145 0 0);\n  --kgcraft-primary: oklch(0.795 0.184 86.047);\n  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);\n  --kgcraft-secondary: oklch(0.274 0.006 286.033);\n  --kgcraft-secondary-foreground: oklch(0.985 0 0);\n  --kgcraft-accent: oklch(0.269 0 0);\n  --kgcraft-accent-foreground: oklch(0.985 0 0);\n  --kgcraft-muted-foreground: oklch(0.708 0 0);\n  --kgcraft-border: oklch(1 0 0 / 10%);\n  --kgcraft-input: oklch(1 0 0 / 15%);\n  --kgcraft-ring: oklch(0.556 0 0);\n}\n"
     }
-  ]
+  ],
+  "docs": "React 18+ and Tailwind CSS 4 required. Import kgcraft-theme.css from your global Tailwind stylesheet. The accordion file keeps the legacy accordian.tsx filename and also exports Accordion."
 }

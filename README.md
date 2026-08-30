@@ -1,6 +1,51 @@
-# Turborepo starter
+# KGCraft UI
 
-This Turborepo starter is maintained by the Turborepo core team.
+Editable React components distributed through the **standard shadcn CLI**.
+
+## Use in another codebase
+
+Use a React + Tailwind CSS 4 app. Initialize shadcn in that app if necessary:
+
+```sh
+npx shadcn@latest init
+```
+
+Start this repository's documentation site with `pnpm web:dev`. Then run the install command shown on its component page in your receiving app:
+
+```sh
+npx shadcn@latest add http://localhost:5173/r/button.json
+npx shadcn@latest add http://localhost:5173/r/accordion.json
+```
+
+Use Vite's actual port if different. After deployment, replace localhost with the real HTTPS site URL. The documentation page does this automatically. No public deployment is implied by these examples.
+
+```tsx
+import { Button } from "@/components/ui/kgcraft-button";
+
+<Button variant="briskPrimary">Get in touch</Button>;
+```
+
+shadcn installs source, variants, helpers, dependencies, and theme variables using your existing `components.json`. No custom KGCraft CLI, npm package, or `kgcraft-ui.json` is required. Prefixed filenames and color variables preserve your existing components and theme.
+
+See [the installation guide](docs/INSTALLATION.md) for CLI/Manual instructions, package-manager alternatives, hosting, and testing. The web app includes previews, source, copyable commands, usage, and props for each component.
+
+## Development and verification
+
+```sh
+pnpm install
+pnpm registry:build
+pnpm registry:test
+pnpm shadcn:test
+pnpm --filter web build
+```
+
+The smoke test uses the real `shadcn@latest` CLI in a temporary app outside this monorepo and verifies installation, custom aliases, CSS merging, TypeScript and a production build. It needs npm network access and retains the temporary app for inspection.
+
+Edit components in `packages/ui/src`, then run `pnpm registry:build`. Generated registry payloads should not be edited by hand.
+
+## Monorepo commands
+
+This repository uses Turborepo. The original workspace commands are documented below.
 
 ## Using this example
 
