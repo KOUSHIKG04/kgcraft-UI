@@ -17,6 +17,8 @@ const componentNames = [
   "shimmer-text",
   "search-bar",
   "command-palette",
+  "input",
+  "tabs",
 ];
 
 for (const name of componentNames) {

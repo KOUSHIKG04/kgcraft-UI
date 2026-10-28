@@ -2,12 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="/favicon-light.png"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Editable React components. Install with shadcn, or copy the source and make it your own."
     />
+    <script>
+      (() => {
+        const saved = localStorage.getItem("kgcraft-theme");
+        const dark = saved !== "light";
+        document.documentElement.classList.toggle("dark", dark);
+        document.documentElement.style.colorScheme = dark ? "dark" : "light";
+        const favicon = document.querySelector("#favicon");
+        if (favicon)
+          favicon.href = dark ? "/favicon-dark.png" : "/favicon-light.png";
+      })();
+    </script>
     <title>KGCraft UI — React components for shadcn</title>
   </head>
   <body>

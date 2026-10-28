@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "Base UI text input with shadcn styling, validation, file, disabled, and RTL states.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2"
+  ],
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\nimport { Input as InputPrimitive } from \"@base-ui/react/input\";\n\nimport { cn } from \"./kgcraft-utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <InputPrimitive\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"cn-input border-kgcraft-input selection:bg-kgcraft-primary selection:text-kgcraft-primary-foreground file:text-kgcraft-foreground placeholder:text-kgcraft-muted-foreground dark:bg-kgcraft-input/30 h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",\n        \"focus-visible:border-kgcraft-ring focus-visible:ring-kgcraft-ring/50 focus-visible:ring-[3px]\",\n        \"aria-invalid:border-kgcraft-destructive aria-invalid:ring-kgcraft-destructive/20 dark:aria-invalid:ring-kgcraft-destructive/40\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Input };\n"
+    },
+    {
+      "path": "components/ui/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    },
+    {
+      "path": "components/ui/kgcraft-theme.css",
+      "type": "registry:ui",
+      "content": "/* Generated KGCraft UI theme. Override --kgcraft-* to customize. */\n@theme inline {\n  --color-kgcraft-background: var(--kgcraft-background);\n  --color-kgcraft-foreground: var(--kgcraft-foreground);\n  --color-kgcraft-primary: var(--kgcraft-primary);\n  --color-kgcraft-primary-foreground: var(--kgcraft-primary-foreground);\n  --color-kgcraft-secondary: var(--kgcraft-secondary);\n  --color-kgcraft-secondary-foreground: var(--kgcraft-secondary-foreground);\n  --color-kgcraft-accent: var(--kgcraft-accent);\n  --color-kgcraft-accent-foreground: var(--kgcraft-accent-foreground);\n  --color-kgcraft-muted-foreground: var(--kgcraft-muted-foreground);\n  --color-kgcraft-border: var(--kgcraft-border);\n  --color-kgcraft-input: var(--kgcraft-input);\n  --color-kgcraft-ring: var(--kgcraft-ring);\n  --color-kgcraft-destructive: var(--kgcraft-destructive);\n}\n\n:root {\n  --kgcraft-background: oklch(1 0 0);\n  --kgcraft-foreground: oklch(0.145 0 0);\n  --kgcraft-primary: oklch(0.852 0.199 91.936);\n  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);\n  --kgcraft-secondary: oklch(0.967 0.001 286.375);\n  --kgcraft-secondary-foreground: oklch(0.21 0.006 285.885);\n  --kgcraft-accent: oklch(0.97 0 0);\n  --kgcraft-accent-foreground: oklch(0.205 0 0);\n  --kgcraft-muted-foreground: oklch(0.556 0 0);\n  --kgcraft-border: oklch(0.922 0 0);\n  --kgcraft-input: oklch(0.922 0 0);\n  --kgcraft-ring: oklch(0.708 0 0);\n  --kgcraft-destructive: oklch(0.577 0.245 27.325);\n}\n\n.dark {\n  --kgcraft-background: oklch(0.145 0 0);\n  --kgcraft-foreground: oklch(0.985 0 0);\n  --kgcraft-primary: oklch(0.795 0.184 86.047);\n  --kgcraft-primary-foreground: oklch(0.421 0.095 57.708);\n  --kgcraft-secondary: oklch(0.274 0.006 286.033);\n  --kgcraft-secondary-foreground: oklch(0.985 0 0);\n  --kgcraft-accent: oklch(0.269 0 0);\n  --kgcraft-accent-foreground: oklch(0.985 0 0);\n  --kgcraft-muted-foreground: oklch(0.708 0 0);\n  --kgcraft-border: oklch(1 0 0 / 10%);\n  --kgcraft-input: oklch(1 0 0 / 15%);\n  --kgcraft-ring: oklch(0.556 0 0);\n  --kgcraft-destructive: oklch(0.704 0.191 22.216);\n}\n"
+    }
+  ],
+  "docs": "React 18+ and Tailwind CSS 4 required. Import kgcraft-theme.css from your global Tailwind stylesheet. The accordion file keeps the legacy accordian.tsx filename and also exports Accordion."
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Accessible Base UI tabs with default, line, and vertical layouts.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2"
+  ],
+  "files": [
+    {
+      "path": "registry/kgcraft/kgcraft-tabs.tsx",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\nimport { cn } from \"./kgcraft-utils\";\n\ntype StyledProps<T extends React.ElementType> = Omit<\n  React.ComponentProps<T>,\n  \"className\"\n> & { className?: string };\n\nfunction Tabs({ className, ...props }: StyledProps<typeof TabsPrimitive.Root>) {\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      className={cn(\n        \"group/tabs flex min-w-0 flex-col gap-2 data-[orientation=vertical]:flex-row\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TabsList({\n  className,\n  variant = \"default\",\n  ...props\n}: StyledProps<typeof TabsPrimitive.List> & { variant?: \"default\" | \"line\" }) {\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      data-variant={variant}\n      className={cn(\n        \"group/tabs-list bg-kgcraft-secondary text-kgcraft-muted-foreground inline-flex w-fit items-center gap-1 rounded-lg p-1 data-[orientation=vertical]:flex-col\",\n        variant === \"line\" &&\n          \"border-kgcraft-border rounded-none border-b bg-transparent p-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TabsTrigger({\n  className,\n  ...props\n}: StyledProps<typeof TabsPrimitive.Tab>) {\n  return (\n    <TabsPrimitive.Tab\n      data-slot=\"tabs-trigger\"\n      className={cn(\n        \"text-kgcraft-muted-foreground hover:text-kgcraft-foreground focus-visible:ring-kgcraft-ring data-[active]:bg-kgcraft-background data-[active]:text-kgcraft-foreground group-data-[variant=line]/tabs-list:data-[active]:border-b-foreground inline-flex items-center justify-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors outline-none group-data-[variant=line]/tabs-list:rounded-none group-data-[variant=line]/tabs-list:border-b-2 focus-visible:ring-2 focus-visible:ring-offset-2 data-[active]:shadow-sm group-data-[variant=line]/tabs-list:data-[active]:bg-transparent group-data-[variant=line]/tabs-list:data-[active]:shadow-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TabsContent({\n  className,\n  ...props\n}: StyledProps<typeof TabsPrimitive.Panel>) {\n  return (\n    <TabsPrimitive.Panel\n      data-slot=\"tabs-content\"\n      className={cn(\n        \"focus-visible:ring-kgcraft-ring min-w-0 flex-1 outline-none focus-visible:ring-2\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n"
+    },
+    {
+      "path": "registry/kgcraft/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ],
+  "docs": "Import Tabs from your configured UI directory's kgcraft-tabs module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+  "cssVars": {
+    "theme": {
+      "color-kgcraft-background": "var(--kgcraft-background)",
+      "color-kgcraft-foreground": "var(--kgcraft-foreground)",
+      "color-kgcraft-primary": "var(--kgcraft-primary)",
+      "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+      "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+      "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+      "color-kgcraft-accent": "var(--kgcraft-accent)",
+      "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+      "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+      "color-kgcraft-border": "var(--kgcraft-border)",
+      "color-kgcraft-input": "var(--kgcraft-input)",
+      "color-kgcraft-ring": "var(--kgcraft-ring)",
+      "color-kgcraft-destructive": "var(--kgcraft-destructive)"
+    },
+    "light": {
+      "kgcraft-background": "oklch(1 0 0)",
+      "kgcraft-foreground": "oklch(0.145 0 0)",
+      "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+      "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+      "kgcraft-accent": "oklch(0.97 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+      "kgcraft-border": "oklch(0.922 0 0)",
+      "kgcraft-input": "oklch(0.922 0 0)",
+      "kgcraft-ring": "oklch(0.708 0 0)",
+      "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
+    },
+    "dark": {
+      "kgcraft-background": "oklch(0.145 0 0)",
+      "kgcraft-foreground": "oklch(0.985 0 0)",
+      "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+      "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+      "kgcraft-accent": "oklch(0.269 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+      "kgcraft-border": "oklch(1 0 0 / 10%)",
+      "kgcraft-input": "oklch(1 0 0 / 15%)",
+      "kgcraft-ring": "oklch(0.556 0 0)",
+      "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
+    }
+  }
+}

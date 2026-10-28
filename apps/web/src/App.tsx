@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
+import type { highlightCode } from "./lib/highlight-code";
 import {
   Accordion,
   Button,
   CommandPalette,
+  Input,
   ScrambleText,
   SearchBar,
   ShimmerText,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
 } from "@repo/ui";
 import {
+  AppWindow,
   ArrowUpRight,
   Check,
   Copy,
+  Code,
   FileText,
   Home,
+  Moon,
   Settings,
-  Terminal,
+  Sun,
 } from "lucide-react";
 import "./App.css";
 
@@ -24,13 +34,51 @@ type ComponentName =
   | "scramble-text"
   | "shimmer-text"
   | "search-bar"
-  | "command-palette";
+  | "command-palette"
+  | "input"
+  | "tabs";
 type Manager = "npm" | "pnpm" | "yarn" | "bun";
 type RegistryItem = {
   dependencies: string[];
   files: { path: string; target: string; content: string }[];
 };
 const components = {
+  tabs: {
+    title: "Tabs",
+    description:
+      "Accessible tabs that display one panel at a time. Supports keyboard navigation, disabled tabs, and vertical layouts.",
+    symbol: "Tabs, TabsList, TabsTrigger, TabsContent",
+    usage:
+      '<Tabs defaultValue="preview">\n  <TabsList aria-label="View">\n    <TabsTrigger value="preview">Preview</TabsTrigger>\n    <TabsTrigger value="source">Source</TabsTrigger>\n  </TabsList>\n  <TabsContent value="preview">Your preview</TabsContent>\n  <TabsContent value="source">Your source</TabsContent>\n</Tabs>',
+    props: [
+      [
+        "defaultValue",
+        "string",
+        "—",
+        "Initial active tab for uncontrolled usage.",
+      ],
+      ["value", "string", "—", "Active tab for controlled usage."],
+      [
+        "onValueChange",
+        "(value, eventDetails) => void",
+        "—",
+        "Called when the active tab changes.",
+      ],
+      [
+        "orientation",
+        '"horizontal" | "vertical"',
+        '"horizontal"',
+        "Layout and keyboard navigation direction.",
+      ],
+      [
+        "variant (TabsList)",
+        '"default" | "line"',
+        '"default"',
+        "Appearance of the tab list.",
+      ],
+      ["disabled (TabsTrigger)", "boolean", "false", "Disables a tab."],
+    ],
+  },
   button: {
     title: "Button",
     description:
@@ -175,7 +223,7 @@ const components = {
       "A searchable keyboard-first command dialog. Open it with Ctrl+K or Command+K and connect each item to your own action.",
     symbol: "CommandPalette",
     usage:
-      '<CommandPalette defaultOpen items={[{ id: "home", label: "Go home", onSelect: () => navigate("/") }]} />',
+      '<CommandPalette\n  defaultOpen\n  items={[\n    {\n      id: "home",\n      label: "Go home",\n      onSelect: () => navigate("/"),\n    },\n  ]}\n/>',
     props: [
       [
         "items",
@@ -205,6 +253,43 @@ const components = {
       ],
     ],
   },
+  input: {
+    title: "Input",
+    description:
+      "The shadcn Base UI input for forms and data entry, including file, disabled, required, invalid, and right-to-left states.",
+    symbol: "Input",
+    usage: '<Input type="email" placeholder="name@example.com" />',
+    props: [
+      [
+        "type",
+        "HTMLInputTypeAttribute",
+        '"text"',
+        "Selects the native input behavior, such as email, password, number, search, or file.",
+      ],
+      ["value", "string | number", "—", "Controlled input value."],
+      [
+        "defaultValue",
+        "string | number",
+        "—",
+        "Initial value for an uncontrolled input.",
+      ],
+      [
+        "placeholder",
+        "string",
+        "—",
+        "Short hint displayed while the input is empty.",
+      ],
+      ["disabled", "boolean", "false", "Disables editing and interaction."],
+      ["required", "boolean", "false", "Marks the field as required."],
+      [
+        "aria-invalid",
+        "boolean | grammar | spelling",
+        "false",
+        "Applies the invalid visual state and exposes validation status.",
+      ],
+      ["className", "string", "—", "Additional classes for the input."],
+    ],
+  },
 } as const;
 const commands: Record<Manager, string> = {
   npm: "npx shadcn@latest",
@@ -219,6 +304,28 @@ const registryBase = (
 
 function CodeBlock({ code, label }: { code: string; label: string }) {
   const [status, setStatus] = useState("");
+  const [highlighted, setHighlighted] = useState<{
+    code: string;
+    tokens: Awaited<ReturnType<typeof highlightCode>>;
+  } | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    void import("./lib/highlight-code")
+      .then(({ highlightCode }) => highlightCode(code, label))
+      .then((tokens) => {
+        if (!cancelled) setHighlighted({ code, tokens });
+      })
+      .catch(() => {
+        // The plain-text code remains readable if highlighting cannot load.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [code, label]);
+  const lines =
+    highlighted?.code === code
+      ? highlighted.tokens
+      : code.split("\n").map((content) => [{ content }]);
   async function copy() {
     try {
       await navigator.clipboard.writeText(code);
@@ -237,7 +344,30 @@ function CodeBlock({ code, label }: { code: string; label: string }) {
         </button>
       </div>
       <pre>
-        <code>{code}</code>
+        <code>
+          {lines.map((line, index) => (
+            <span className="code-line" key={index}>
+              <span className="code-line-number" aria-hidden="true">
+                {index + 1}
+              </span>
+              <span className="code-line-content">
+                {line.map((token, tokenIndex) => (
+                  <span
+                    key={tokenIndex}
+                    style={
+                      "htmlStyle" in token
+                        ? (token.htmlStyle as CSSProperties)
+                        : undefined
+                    }
+                  >
+                    {token.content}
+                  </span>
+                ))}
+                {index < lines.length - 1 ? "\n" : ""}
+              </span>
+            </span>
+          ))}
+        </code>
       </pre>
       <span className="sr-only" role="status">
         {status}
@@ -257,7 +387,6 @@ export default function App() {
   const component = components[name];
   const [method, setMethod] = useState<"CLI" | "Manual">("CLI");
   const [manager, setManager] = useState<Manager>("npm");
-  const [preview, setPreview] = useState<"Preview" | "Source">("Preview");
   const [item, setItem] = useState<RegistryItem | null>(null);
   const [theme, setTheme] = useState("");
   const [error, setError] = useState("");
@@ -265,7 +394,19 @@ export default function App() {
   const [clicks, setClicks] = useState(0);
   const [search, setSearch] = useState("");
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [colorMode, setColorMode] = useState<"light" | "dark">(() =>
+    document.documentElement.classList.contains("dark") ? "dark" : "light",
+  );
   const registryUrl = `${registryBase}/${name}.json`;
+  useEffect(() => {
+    const dark = colorMode === "dark";
+    document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.style.colorScheme = colorMode;
+    localStorage.setItem("kgcraft-theme", colorMode);
+    const favicon = document.querySelector<HTMLLinkElement>("#favicon");
+    if (favicon)
+      favicon.href = dark ? "/favicon-dark.png" : "/favicon-light.png";
+  }, [colorMode]);
   useEffect(() => {
     document.title = `${component.title} — KGCraft UI`;
     const controller = new AbortController();
@@ -310,25 +451,32 @@ export default function App() {
   return (
     <div className="docs-shell">
       <header className="site-header">
-        <a className="brand" href="?component=button">
-          <span className="brand-mark">K</span>
-          <span>
-            KGCraft <span className="muted">UI</span>
-          </span>
-        </a>
-        <span className="header-caption">
-          Small details. Better interfaces.
-        </span>
-        <a
-          className="github-link"
-          href="https://github.com/KOUSHIKG04/kgcraft-UI"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Terminal size={17} />
-          <span>Source</span>
-          <ArrowUpRight size={14} />
-        </a>
+        <div className="site-header-inner">
+          <a className="brand" href="?component=button">
+            <span className="brand-mark" aria-hidden="true">
+              <img src="/kgcraft-logo.png" alt="" />
+            </span>
+            <span className="mt-0.5">
+              Craft <span className="muted">UI</span>
+            </span>
+          </a>
+          <div className="header-actions">
+            <span className="header-caption">
+              Small details. Better interfaces.
+            </span>
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={() =>
+                setColorMode((mode) => (mode === "light" ? "dark" : "light"))
+              }
+              aria-label={`Switch to ${colorMode === "light" ? "dark" : "light"} theme`}
+              title={`Switch to ${colorMode === "light" ? "dark" : "light"} theme`}
+            >
+              {colorMode === "light" ? <Moon size={16} /> : <Sun size={16} />}
+            </button>
+          </div>
+        </div>
       </header>
       <div className="docs-layout">
         <aside className="sidebar">
@@ -337,59 +485,73 @@ export default function App() {
             Getting started <ArrowUpRight size={13} />
           </a>
           <p className="nav-label component-label">
-            COMPONENTS <span>06</span>
+            COMPONENTS{" "}
+            <span>
+              {String(Object.keys(components).length).padStart(2, "0")}
+            </span>
           </p>
           <nav aria-label="Components">
-            {(Object.keys(components) as ComponentName[]).map((key) => (
-              <a
-                key={key}
-                href={`?component=${key}`}
-                aria-current={key === name ? "page" : undefined}
-              >
-                <span>{components[key].title}</span>
-                {key === name && <span className="active-dot" />}
-              </a>
-            ))}
+            {(Object.keys(components) as ComponentName[])
+              .sort((a, b) =>
+                components[a].title.localeCompare(components[b].title),
+              )
+              .map((key) => (
+                <a
+                  key={key}
+                  href={`?component=${key}`}
+                  aria-current={key === name ? "page" : undefined}
+                >
+                  <span>{components[key].title}</span>
+                  {key === name && <span className="active-dot" />}
+                </a>
+              ))}
           </nav>
-          <div className="sidebar-note">
-            <Terminal size={18} />
-            <strong>Your code. Your components.</strong>
-            <p>
-              Install with shadcn.
-              <br />
-              Make it your own.
-            </p>
-          </div>
         </aside>
         <main className="doc-main">
-          <div className="breadcrumb">
-            Components <span>/</span> <span>{component.title}</span>
-          </div>
           <div className="title-line">
             <h1>{component.title}</h1>
             <span className="component-badge">React</span>
           </div>
           <p className="lead">{component.description}</p>
-          <section className="preview-section" aria-label="Component preview">
+          <Tabs
+            defaultValue="preview"
+            className="preview-section"
+            aria-label="Component preview"
+          >
             <div className="section-toolbar">
-              <div className="segmented" role="group" aria-label="Preview mode">
-                {(["Preview", "Source"] as const).map((tab) => (
-                  <button
-                    type="button"
-                    key={tab}
-                    aria-pressed={preview === tab}
-                    onClick={() => setPreview(tab)}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
+              <TabsList aria-label="Preview mode" className="preview-tabs">
+                <TabsTrigger value="preview">
+                  <AppWindow size={16} aria-hidden="true" />
+                  Preview
+                </TabsTrigger>
+                <TabsTrigger value="source">
+                  <Code size={16} aria-hidden="true" />
+                  Code
+                </TabsTrigger>
+              </TabsList>
               <span className="toolbar-note">
                 Built with care, ready to copy.
               </span>
             </div>
-            {preview === "Preview" ? (
+            <TabsContent value="preview">
               <div className="preview-canvas">
+                {name === "tabs" && (
+                  <Tabs defaultValue="account" className="w-full max-w-sm">
+                    <TabsList aria-label="Account settings">
+                      <TabsTrigger value="account">Account</TabsTrigger>
+                      <TabsTrigger value="password">Password</TabsTrigger>
+                      <TabsTrigger value="disabled" disabled>
+                        Disabled
+                      </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="account" className="p-4 text-sm">
+                      Manage your account settings.
+                    </TabsContent>
+                    <TabsContent value="password" className="p-4 text-sm">
+                      Update your password.
+                    </TabsContent>
+                  </Tabs>
+                )}
                 {name === "button" && (
                   <div className="button-demo">
                     <Button
@@ -431,7 +593,7 @@ export default function App() {
                   </div>
                 )}
                 {name === "scramble-text" && (
-                  <div className="text-effect-demo">
+                  <div className="text-effect-demo scramble-demo">
                     <ScrambleText
                       text="Geist meets thoughtful motion"
                       speed={8}
@@ -499,16 +661,48 @@ export default function App() {
                     />
                   </div>
                 )}
+                {name === "input" && (
+                  <div className="input-demo">
+                    <div className="input-demo-field">
+                      <label htmlFor="input-demo-email">Email</label>
+                      <Input
+                        id="input-demo-email"
+                        type="email"
+                        placeholder="name@example.com"
+                        aria-describedby="input-demo-email-description"
+                      />
+                      <span id="input-demo-email-description">
+                        We’ll only use this address for account updates.
+                      </span>
+                    </div>
+                    <div className="input-demo-row">
+                      <Input placeholder="Disabled" disabled />
+                      <Input
+                        defaultValue="Invalid value"
+                        aria-invalid="true"
+                        aria-label="Invalid example"
+                      />
+                    </div>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      aria-label="Upload a profile picture"
+                    />
+                  </div>
+                )}
               </div>
-            ) : item ? (
-              <CodeBlock
-                code={item.files[0]?.content ?? ""}
-                label={`${name} source`}
-              />
-            ) : (
-              <p className="loading">Loading source…</p>
-            )}
-          </section>
+            </TabsContent>
+            <TabsContent value="source">
+              {item ? (
+                <CodeBlock
+                  code={item.files[0]?.content ?? ""}
+                  label={`${name} source`}
+                />
+              ) : (
+                <p className="loading">Loading source…</p>
+              )}
+            </TabsContent>
+          </Tabs>
           {error && (
             <div className="load-error" role="alert">
               {error}{" "}
@@ -519,116 +713,123 @@ export default function App() {
           )}
           <section id="installation" className="doc-section">
             <div className="section-title">
-              <span className="section-number">01</span>
               <h2>Installation</h2>
             </div>
-            <div
-              className="method-tabs"
-              role="group"
-              aria-label="Installation method"
+            <Tabs
+              value={method}
+              onValueChange={(value) => {
+                if (value === "CLI" || value === "Manual") setMethod(value);
+              }}
             >
-              {(["CLI", "Manual"] as const).map((tab) => (
-                <button
-                  type="button"
-                  key={tab}
-                  aria-pressed={method === tab}
-                  onClick={() => setMethod(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-            <p className="body-copy">
-              {method === "CLI"
-                ? "Add the component to your project with the shadcn CLI."
-                : "Prefer to do it yourself? Copy the source and keep full control."}
-            </p>
-            <div
-              className="package-tabs"
-              role="group"
-              aria-label="Package manager"
-            >
-              {(Object.keys(commands) as Manager[]).map((pm) => (
-                <button
-                  type="button"
-                  key={pm}
-                  aria-pressed={manager === pm}
-                  onClick={() => setManager(pm)}
-                >
-                  {pm}
-                </button>
-              ))}
-            </div>
-            {method === "CLI" ? (
-              <>
-                <CodeBlock
-                  key={manager}
-                  code={`${commands[manager]} add ${registryUrl}`}
-                  label="Install command"
-                />
-                <p className="install-note">
-                  Already using shadcn? You’re ready. Otherwise run{" "}
-                  <code>{commands[manager]} init</code> first. Requires Tailwind
-                  CSS 4.
-                </p>
-                {local && (
-                  <p className="local-notice">
-                    Local preview: this URL works on this computer. Deploy the
-                    site to share a public install URL.
-                  </p>
-                )}
-              </>
-            ) : item ? (
-              <div className="manual-steps">
-                <h3>1. Install dependencies</h3>
-                <CodeBlock
-                  key={manager}
-                  code={dependencyCommand}
-                  label="Dependencies"
-                />
-                <h3>2. Copy the component files</h3>
-                <p className="body-copy">
-                  Place all files together in your configured UI directory
-                  (usually <code>src/components/ui</code>).
-                </p>
-                {item.files.map((file) => (
-                  <details key={file.path}>
-                    <summary>
-                      {file.target.replace("@ui/", "components/ui/")}
-                    </summary>
-                    <CodeBlock
-                      code={file.content}
-                      label={file.target.replace("@ui/", "")}
-                    />
-                  </details>
+              <TabsList aria-label="Installation method">
+                {(["CLI", "Manual"] as const).map((tab) => (
+                  <TabsTrigger key={tab} value={tab}>
+                    {tab}
+                  </TabsTrigger>
                 ))}
-                <h3>3. Add the theme</h3>
+              </TabsList>
+              <TabsContent key={method} value={method}>
                 <p className="body-copy">
-                  Add this once to your global Tailwind stylesheet, after{" "}
-                  <code>{'@import "tailwindcss";'}</code>. Keep the stylesheet
-                  imported by your app.
+                  {method === "CLI"
+                    ? "Add the component to your project with the shadcn CLI."
+                    : "Prefer to do it yourself? Copy the source and keep full control."}
                 </p>
-                <details>
-                  <summary>Global CSS — KGCraft theme</summary>
-                  <CodeBlock code={theme} label="Theme CSS" />
-                </details>
-              </div>
-            ) : (
-              <p className="loading">Loading installation files…</p>
-            )}
+                <Tabs
+                  value={manager}
+                  onValueChange={(value) => {
+                    if (typeof value === "string" && value in commands)
+                      setManager(value as Manager);
+                  }}
+                >
+                  <TabsList aria-label="Package manager">
+                    {(Object.keys(commands) as Manager[]).map((pm) => (
+                      <TabsTrigger key={pm} value={pm}>
+                        {pm}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                  <TabsContent key={manager} value={manager}>
+                    {method === "CLI" ? (
+                      <>
+                        <CodeBlock
+                          key={manager}
+                          code={`${commands[manager]} add ${registryUrl}`}
+                          label="Install command"
+                        />
+                        <p className="install-note">
+                          Already using shadcn? You’re ready. Otherwise run{" "}
+                          <code>{commands[manager]} init</code> first. Requires
+                          Tailwind CSS 4.
+                        </p>
+                        {local && (
+                          <p className="local-notice">
+                            Local preview: this URL works on this computer.
+                            Deploy the site to share a public install URL.
+                          </p>
+                        )}
+                      </>
+                    ) : item ? (
+                      <div className="manual-steps">
+                        <h3>1. Install dependencies</h3>
+                        <CodeBlock
+                          key={manager}
+                          code={dependencyCommand}
+                          label="Dependencies"
+                        />
+                        <h3>2. Copy the component files</h3>
+                        <p className="body-copy">
+                          Place all files together in your configured UI
+                          directory (usually <code>src/components/ui</code>).
+                        </p>
+                        {item.files.map((file) => (
+                          <div className="manual-disclosure" key={file.path}>
+                            <Accordion
+                              content={
+                                <CodeBlock
+                                  code={file.content}
+                                  label={file.target.replace("@ui/", "")}
+                                />
+                              }
+                            >
+                              {file.target.replace("@ui/", "components/ui/")}
+                            </Accordion>
+                          </div>
+                        ))}
+                        <h3>3. Add the theme</h3>
+                        <p className="body-copy">
+                          Add this once to your global Tailwind stylesheet,
+                          after <code>{'@import "tailwindcss";'}</code>. Keep
+                          the stylesheet imported by your app.
+                        </p>
+                        <div className="manual-disclosure">
+                          <Accordion
+                            content={
+                              <CodeBlock code={theme} label="Theme CSS" />
+                            }
+                          >
+                            Global CSS — KGCraft theme
+                          </Accordion>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="loading">Loading installation files…</p>
+                    )}
+                  </TabsContent>
+                </Tabs>
+              </TabsContent>
+            </Tabs>
           </section>
           <section id="usage" className="doc-section">
             <div className="section-title">
-              <span className="section-number">02</span>
               <h2>Usage</h2>
             </div>
-            <p className="body-copy">Import the component:</p>
             <CodeBlock
               code={`import { ${component.symbol} } from "@/components/ui/kgcraft-${name}"`}
               label="Import"
             />
-            <p className="body-copy usage-label">Use it in your code:</p>
-            <CodeBlock code={component.usage} label="Usage example" />
+            <div className="usage-example">
+              <CodeBlock code={component.usage} label="Usage example" />
+            </div>
             <p className="install-note">
               The import above uses shadcn’s default UI alias. Your{" "}
               <code>components.json</code> controls the installed directory.
@@ -637,7 +838,6 @@ export default function App() {
           </section>
           <section id="props" className="doc-section">
             <div className="section-title">
-              <span className="section-number">03</span>
               <h2>Props</h2>
             </div>
             <div className="table-scroll">
@@ -682,15 +882,6 @@ export default function App() {
             </a>
           </footer>
         </main>
-        <aside className="page-nav">
-          <p className="nav-label">ON THIS PAGE</p>
-          <a href="#installation">Installation</a>
-          <a href="#usage">Usage</a>
-          <a href="#props">Props</a>
-          <div className="compatibility">
-            <span className="active-dot" /> shadcn compatible
-          </div>
-        </aside>
       </div>
     </div>
   );

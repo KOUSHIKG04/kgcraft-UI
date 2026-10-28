@@ -10,6 +10,7 @@ const pkg = JSON.parse(
 );
 const tokens = [
   "background",
+  "foreground",
   "primary",
   "primary-foreground",
   "secondary",
@@ -20,6 +21,7 @@ const tokens = [
   "border",
   "input",
   "ring",
+  "destructive",
 ];
 const globalCss = await read("styles/global.css");
 
@@ -114,7 +116,23 @@ const definitions = [
     files: ["command-palette/command-palette.tsx"],
     dependencies: ["clsx", "tailwind-merge", "lucide-react"],
   },
+  {
+    name: "input",
+    title: "Input",
+    description:
+      "Base UI text input with shadcn styling, validation, file, disabled, and RTL states.",
+    files: ["input/input.tsx"],
+    dependencies: ["@base-ui/react", "clsx", "tailwind-merge"],
+  },
 ];
+definitions.push({
+  name: "tabs",
+  title: "Tabs",
+  description:
+    "Accessible Base UI tabs with default, line, and vertical layouts.",
+  files: ["tabs/tabs.tsx"],
+  dependencies: ["@base-ui/react", "clsx", "tailwind-merge"],
+});
 const items = [];
 for (const def of definitions) {
   items.push({

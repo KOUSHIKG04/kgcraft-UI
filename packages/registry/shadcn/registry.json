@@ -38,6 +38,7 @@
       "cssVars": {
         "theme": {
           "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
           "color-kgcraft-primary": "var(--kgcraft-primary)",
           "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
           "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -47,10 +48,12 @@
           "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
           "color-kgcraft-border": "var(--kgcraft-border)",
           "color-kgcraft-input": "var(--kgcraft-input)",
-          "color-kgcraft-ring": "var(--kgcraft-ring)"
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
         },
         "light": {
           "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
           "kgcraft-primary": "oklch(0.852 0.199 91.936)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -60,10 +63,12 @@
           "kgcraft-muted-foreground": "oklch(0.556 0 0)",
           "kgcraft-border": "oklch(0.922 0 0)",
           "kgcraft-input": "oklch(0.922 0 0)",
-          "kgcraft-ring": "oklch(0.708 0 0)"
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
         },
         "dark": {
           "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
           "kgcraft-primary": "oklch(0.795 0.184 86.047)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -73,7 +78,8 @@
           "kgcraft-muted-foreground": "oklch(0.708 0 0)",
           "kgcraft-border": "oklch(1 0 0 / 10%)",
           "kgcraft-input": "oklch(1 0 0 / 15%)",
-          "kgcraft-ring": "oklch(0.556 0 0)"
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
         }
       }
     },
@@ -114,6 +120,7 @@
       "cssVars": {
         "theme": {
           "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
           "color-kgcraft-primary": "var(--kgcraft-primary)",
           "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
           "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -123,10 +130,12 @@
           "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
           "color-kgcraft-border": "var(--kgcraft-border)",
           "color-kgcraft-input": "var(--kgcraft-input)",
-          "color-kgcraft-ring": "var(--kgcraft-ring)"
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
         },
         "light": {
           "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
           "kgcraft-primary": "oklch(0.852 0.199 91.936)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -136,10 +145,12 @@
           "kgcraft-muted-foreground": "oklch(0.556 0 0)",
           "kgcraft-border": "oklch(0.922 0 0)",
           "kgcraft-input": "oklch(0.922 0 0)",
-          "kgcraft-ring": "oklch(0.708 0 0)"
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
         },
         "dark": {
           "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
           "kgcraft-primary": "oklch(0.795 0.184 86.047)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -149,7 +160,8 @@
           "kgcraft-muted-foreground": "oklch(0.708 0 0)",
           "kgcraft-border": "oklch(1 0 0 / 10%)",
           "kgcraft-input": "oklch(1 0 0 / 15%)",
-          "kgcraft-ring": "oklch(0.556 0 0)"
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
         }
       }
     },
@@ -181,6 +193,7 @@
       "cssVars": {
         "theme": {
           "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
           "color-kgcraft-primary": "var(--kgcraft-primary)",
           "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
           "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -190,10 +203,12 @@
           "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
           "color-kgcraft-border": "var(--kgcraft-border)",
           "color-kgcraft-input": "var(--kgcraft-input)",
-          "color-kgcraft-ring": "var(--kgcraft-ring)"
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
         },
         "light": {
           "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
           "kgcraft-primary": "oklch(0.852 0.199 91.936)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -203,10 +218,12 @@
           "kgcraft-muted-foreground": "oklch(0.556 0 0)",
           "kgcraft-border": "oklch(0.922 0 0)",
           "kgcraft-input": "oklch(0.922 0 0)",
-          "kgcraft-ring": "oklch(0.708 0 0)"
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
         },
         "dark": {
           "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
           "kgcraft-primary": "oklch(0.795 0.184 86.047)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -216,7 +233,8 @@
           "kgcraft-muted-foreground": "oklch(0.708 0 0)",
           "kgcraft-border": "oklch(1 0 0 / 10%)",
           "kgcraft-input": "oklch(1 0 0 / 15%)",
-          "kgcraft-ring": "oklch(0.556 0 0)"
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
         }
       }
     },
@@ -249,6 +267,7 @@
       "cssVars": {
         "theme": {
           "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
           "color-kgcraft-primary": "var(--kgcraft-primary)",
           "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
           "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -258,10 +277,12 @@
           "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
           "color-kgcraft-border": "var(--kgcraft-border)",
           "color-kgcraft-input": "var(--kgcraft-input)",
-          "color-kgcraft-ring": "var(--kgcraft-ring)"
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
         },
         "light": {
           "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
           "kgcraft-primary": "oklch(0.852 0.199 91.936)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -271,10 +292,12 @@
           "kgcraft-muted-foreground": "oklch(0.556 0 0)",
           "kgcraft-border": "oklch(0.922 0 0)",
           "kgcraft-input": "oklch(0.922 0 0)",
-          "kgcraft-ring": "oklch(0.708 0 0)"
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
         },
         "dark": {
           "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
           "kgcraft-primary": "oklch(0.795 0.184 86.047)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -284,7 +307,8 @@
           "kgcraft-muted-foreground": "oklch(0.708 0 0)",
           "kgcraft-border": "oklch(1 0 0 / 10%)",
           "kgcraft-input": "oklch(1 0 0 / 15%)",
-          "kgcraft-ring": "oklch(0.556 0 0)"
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
         }
       }
     },
@@ -304,7 +328,7 @@
           "path": "registry/kgcraft/kgcraft-search-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/kgcraft-search-bar.tsx",
-          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Search, X } from \"lucide-react\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface SearchBarProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\" | \"size\"\n> {\n  onClear?: () => void;\n  containerClassName?: string;\n}\n\nexport const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(\n  (\n    {\n      className,\n      containerClassName,\n      value,\n      defaultValue,\n      onChange,\n      onClear,\n      placeholder = \"Search…\",\n      ...props\n    },\n    ref,\n  ) => {\n    const [internalValue, setInternalValue] = React.useState(\n      String(defaultValue ?? \"\"),\n    );\n    const currentValue = value === undefined ? internalValue : String(value);\n\n    function change(event: React.ChangeEvent<HTMLInputElement>) {\n      if (value === undefined) setInternalValue(event.target.value);\n      onChange?.(event);\n    }\n\n    function clear() {\n      if (value === undefined) setInternalValue(\"\");\n      onClear?.();\n    }\n\n    return (\n      <div\n        className={cn(\n          \"border-kgcraft-input bg-kgcraft-background focus-within:border-kgcraft-ring/60 focus-within:ring-kgcraft-ring/20 flex h-10 w-full items-center gap-2 rounded-md border px-3 shadow-sm transition-[border-color,box-shadow] focus-within:ring-1\",\n          containerClassName,\n        )}\n      >\n        <Search className=\"text-kgcraft-muted-foreground h-4 w-4 shrink-0\" />\n        <input\n          ref={ref}\n          type=\"search\"\n          value={currentValue}\n          onChange={change}\n          placeholder={placeholder}\n          className={cn(\n            \"placeholder:text-kgcraft-muted-foreground min-w-0 flex-1 bg-transparent text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-search-cancel-button]:hidden\",\n            className,\n          )}\n          {...props}\n        />\n        {currentValue && !props.disabled ? (\n          <button\n            type=\"button\"\n            onClick={clear}\n            className=\"text-kgcraft-muted-foreground hover:text-foreground rounded-sm\"\n            aria-label=\"Clear search\"\n          >\n            <X className=\"h-4 w-4\" />\n          </button>\n        ) : null}\n      </div>\n    );\n  },\n);\n\nSearchBar.displayName = \"SearchBar\";\n"
+          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Search, X } from \"lucide-react\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface SearchBarProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\" | \"size\"\n> {\n  onClear?: () => void;\n  containerClassName?: string;\n}\n\nexport const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(\n  (\n    {\n      className,\n      containerClassName,\n      value,\n      defaultValue,\n      onChange,\n      onClear,\n      placeholder = \"Search…\",\n      ...props\n    },\n    ref,\n  ) => {\n    const [internalValue, setInternalValue] = React.useState(\n      String(defaultValue ?? \"\"),\n    );\n    const currentValue = value === undefined ? internalValue : String(value);\n\n    function change(event: React.ChangeEvent<HTMLInputElement>) {\n      if (value === undefined) setInternalValue(event.target.value);\n      onChange?.(event);\n    }\n\n    function clear() {\n      if (value === undefined) setInternalValue(\"\");\n      onClear?.();\n    }\n\n    return (\n      <div\n        className={cn(\n          \"border-kgcraft-input bg-kgcraft-background focus-within:border-kgcraft-ring/60 focus-within:ring-kgcraft-ring/20 flex h-10 w-full items-center gap-2 rounded-md border px-3 shadow-sm transition-[border-color,box-shadow] focus-within:ring-1\",\n          containerClassName,\n        )}\n      >\n        <Search className=\"text-kgcraft-muted-foreground h-4 w-4 shrink-0\" />\n        <input\n          ref={ref}\n          type=\"search\"\n          value={currentValue}\n          onChange={change}\n          placeholder={placeholder}\n          className={cn(\n            \"placeholder:text-kgcraft-muted-foreground min-w-0 flex-1 bg-transparent text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-search-cancel-button]:hidden\",\n            className,\n          )}\n          {...props}\n        />\n        {currentValue && !props.disabled ? (\n          <button\n            type=\"button\"\n            onClick={clear}\n            className=\"text-kgcraft-muted-foreground hover:text-kgcraft-foreground rounded-sm\"\n            aria-label=\"Clear search\"\n          >\n            <X className=\"h-4 w-4\" />\n          </button>\n        ) : null}\n      </div>\n    );\n  },\n);\n\nSearchBar.displayName = \"SearchBar\";\n"
         },
         {
           "path": "registry/kgcraft/kgcraft-utils.ts",
@@ -317,6 +341,7 @@
       "cssVars": {
         "theme": {
           "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
           "color-kgcraft-primary": "var(--kgcraft-primary)",
           "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
           "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -326,10 +351,12 @@
           "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
           "color-kgcraft-border": "var(--kgcraft-border)",
           "color-kgcraft-input": "var(--kgcraft-input)",
-          "color-kgcraft-ring": "var(--kgcraft-ring)"
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
         },
         "light": {
           "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
           "kgcraft-primary": "oklch(0.852 0.199 91.936)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -339,10 +366,12 @@
           "kgcraft-muted-foreground": "oklch(0.556 0 0)",
           "kgcraft-border": "oklch(0.922 0 0)",
           "kgcraft-input": "oklch(0.922 0 0)",
-          "kgcraft-ring": "oklch(0.708 0 0)"
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
         },
         "dark": {
           "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
           "kgcraft-primary": "oklch(0.795 0.184 86.047)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -352,7 +381,8 @@
           "kgcraft-muted-foreground": "oklch(0.708 0 0)",
           "kgcraft-border": "oklch(1 0 0 / 10%)",
           "kgcraft-input": "oklch(1 0 0 / 15%)",
-          "kgcraft-ring": "oklch(0.556 0 0)"
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
         }
       }
     },
@@ -372,7 +402,7 @@
           "path": "registry/kgcraft/kgcraft-command-palette.tsx",
           "type": "registry:ui",
           "target": "@ui/kgcraft-command-palette.tsx",
-          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Command, Search, X } from \"lucide-react\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface CommandPaletteItem {\n  id: string;\n  label: string;\n  description?: string;\n  shortcut?: string;\n  icon?: React.ReactNode;\n  onSelect?: () => void;\n}\n\nexport interface CommandPaletteProps {\n  items: CommandPaletteItem[];\n  open?: boolean;\n  defaultOpen?: boolean;\n  onOpenChange?: (open: boolean) => void;\n  placeholder?: string;\n  emptyMessage?: string;\n  className?: string;\n}\n\nexport function CommandPalette({\n  items,\n  open,\n  defaultOpen = false,\n  onOpenChange,\n  placeholder = \"Type a command or search…\",\n  emptyMessage = \"No commands found.\",\n  className,\n}: CommandPaletteProps) {\n  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);\n  const [query, setQuery] = React.useState(\"\");\n  const [activeIndex, setActiveIndex] = React.useState(0);\n  const isOpen = open ?? internalOpen;\n\n  const setOpen = React.useCallback(\n    (next: boolean) => {\n      if (open === undefined) setInternalOpen(next);\n      onOpenChange?.(next);\n      if (!next) setQuery(\"\");\n    },\n    [onOpenChange, open],\n  );\n\n  React.useEffect(() => {\n    function keydown(event: KeyboardEvent) {\n      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === \"k\") {\n        event.preventDefault();\n        setOpen(!isOpen);\n      }\n      if (event.key === \"Escape\" && isOpen) setOpen(false);\n    }\n    window.addEventListener(\"keydown\", keydown);\n    return () => window.removeEventListener(\"keydown\", keydown);\n  }, [isOpen, setOpen]);\n\n  const filtered = items.filter((item) =>\n    `${item.label} ${item.description ?? \"\"}`\n      .toLowerCase()\n      .includes(query.toLowerCase()),\n  );\n\n  function select(item: CommandPaletteItem | undefined) {\n    if (!item) return;\n    item.onSelect?.();\n    setOpen(false);\n  }\n\n  if (!isOpen) return null;\n\n  return (\n    <div\n      className=\"fixed inset-0 z-50 flex items-start justify-center bg-black/45 px-4 pt-[15vh]\"\n      role=\"presentation\"\n      onMouseDown={(event) => {\n        if (event.target === event.currentTarget) setOpen(false);\n      }}\n    >\n      <div\n        role=\"dialog\"\n        aria-modal=\"true\"\n        aria-label=\"Command palette\"\n        className={cn(\n          \"border-kgcraft-border bg-kgcraft-background w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl\",\n          className,\n        )}\n      >\n        <div className=\"border-kgcraft-border flex items-center gap-3 border-b px-4\">\n          <Search className=\"text-kgcraft-muted-foreground h-4 w-4\" />\n          <input\n            autoFocus\n            value={query}\n            onChange={(event) => {\n              setQuery(event.target.value);\n              setActiveIndex(0);\n            }}\n            onKeyDown={(event) => {\n              if (event.key === \"ArrowDown\") {\n                event.preventDefault();\n                setActiveIndex((index) =>\n                  Math.min(index + 1, Math.max(0, filtered.length - 1)),\n                );\n              }\n              if (event.key === \"ArrowUp\") {\n                event.preventDefault();\n                setActiveIndex((index) => Math.max(index - 1, 0));\n              }\n              if (event.key === \"Enter\") {\n                event.preventDefault();\n                select(filtered[activeIndex]);\n              }\n            }}\n            placeholder={placeholder}\n            className=\"placeholder:text-kgcraft-muted-foreground h-12 min-w-0 flex-1 bg-transparent text-sm outline-none\"\n          />\n          <button\n            type=\"button\"\n            onClick={() => setOpen(false)}\n            className=\"text-kgcraft-muted-foreground hover:text-foreground rounded-sm\"\n            aria-label=\"Close command palette\"\n          >\n            <X className=\"h-4 w-4\" />\n          </button>\n        </div>\n        <div className=\"max-h-80 overflow-y-auto p-2\" role=\"listbox\">\n          {filtered.length ? (\n            filtered.map((item, index) => (\n              <button\n                type=\"button\"\n                role=\"option\"\n                aria-selected={index === activeIndex}\n                key={item.id}\n                onMouseMove={() => setActiveIndex(index)}\n                onClick={() => select(item)}\n                className={cn(\n                  \"hover:bg-kgcraft-accent hover:text-kgcraft-accent-foreground flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm\",\n                  index === activeIndex && \"bg-kgcraft-accent text-kgcraft-accent-foreground\",\n                )}\n              >\n                <span className=\"text-kgcraft-muted-foreground grid h-5 w-5 place-items-center\">\n                  {item.icon ?? <Command className=\"h-4 w-4\" />}\n                </span>\n                <span className=\"min-w-0 flex-1\">\n                  <span className=\"block font-medium\">{item.label}</span>\n                  {item.description ? (\n                    <span className=\"text-kgcraft-muted-foreground block truncate text-xs\">\n                      {item.description}\n                    </span>\n                  ) : null}\n                </span>\n                {item.shortcut ? (\n                  <kbd className=\"border-kgcraft-border text-kgcraft-muted-foreground rounded border px-1.5 py-0.5 text-[10px]\">\n                    {item.shortcut}\n                  </kbd>\n                ) : null}\n              </button>\n            ))\n          ) : (\n            <p className=\"text-kgcraft-muted-foreground py-8 text-center text-sm\">\n              {emptyMessage}\n            </p>\n          )}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Command, Search, X } from \"lucide-react\";\nimport { cn } from \"./kgcraft-utils\";\n\nexport interface CommandPaletteItem {\n  id: string;\n  label: string;\n  description?: string;\n  shortcut?: string;\n  icon?: React.ReactNode;\n  onSelect?: () => void;\n}\n\nexport interface CommandPaletteProps {\n  items: CommandPaletteItem[];\n  open?: boolean;\n  defaultOpen?: boolean;\n  onOpenChange?: (open: boolean) => void;\n  placeholder?: string;\n  emptyMessage?: string;\n  className?: string;\n}\n\nexport function CommandPalette({\n  items,\n  open,\n  defaultOpen = false,\n  onOpenChange,\n  placeholder = \"Type a command or search…\",\n  emptyMessage = \"No commands found.\",\n  className,\n}: CommandPaletteProps) {\n  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);\n  const [query, setQuery] = React.useState(\"\");\n  const [activeIndex, setActiveIndex] = React.useState(0);\n  const isOpen = open ?? internalOpen;\n\n  const setOpen = React.useCallback(\n    (next: boolean) => {\n      if (open === undefined) setInternalOpen(next);\n      onOpenChange?.(next);\n      if (!next) setQuery(\"\");\n    },\n    [onOpenChange, open],\n  );\n\n  React.useEffect(() => {\n    function keydown(event: KeyboardEvent) {\n      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === \"k\") {\n        event.preventDefault();\n        setOpen(!isOpen);\n      }\n      if (event.key === \"Escape\" && isOpen) setOpen(false);\n    }\n    window.addEventListener(\"keydown\", keydown);\n    return () => window.removeEventListener(\"keydown\", keydown);\n  }, [isOpen, setOpen]);\n\n  const filtered = items.filter((item) =>\n    `${item.label} ${item.description ?? \"\"}`\n      .toLowerCase()\n      .includes(query.toLowerCase()),\n  );\n\n  function select(item: CommandPaletteItem | undefined) {\n    if (!item) return;\n    item.onSelect?.();\n    setOpen(false);\n  }\n\n  if (!isOpen) return null;\n\n  return (\n    <div\n      className=\"fixed inset-0 z-50 flex items-start justify-center bg-black/45 px-4 pt-[15vh]\"\n      role=\"presentation\"\n      onMouseDown={(event) => {\n        if (event.target === event.currentTarget) setOpen(false);\n      }}\n    >\n      <div\n        role=\"dialog\"\n        aria-modal=\"true\"\n        aria-label=\"Command palette\"\n        className={cn(\n          \"border-kgcraft-border bg-kgcraft-background w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl\",\n          className,\n        )}\n      >\n        <div className=\"border-kgcraft-border flex items-center gap-3 border-b px-4\">\n          <Search className=\"text-kgcraft-muted-foreground h-4 w-4\" />\n          <input\n            autoFocus\n            value={query}\n            onChange={(event) => {\n              setQuery(event.target.value);\n              setActiveIndex(0);\n            }}\n            onKeyDown={(event) => {\n              if (event.key === \"ArrowDown\") {\n                event.preventDefault();\n                setActiveIndex((index) =>\n                  Math.min(index + 1, Math.max(0, filtered.length - 1)),\n                );\n              }\n              if (event.key === \"ArrowUp\") {\n                event.preventDefault();\n                setActiveIndex((index) => Math.max(index - 1, 0));\n              }\n              if (event.key === \"Enter\") {\n                event.preventDefault();\n                select(filtered[activeIndex]);\n              }\n            }}\n            placeholder={placeholder}\n            className=\"placeholder:text-kgcraft-muted-foreground h-12 min-w-0 flex-1 bg-transparent text-sm outline-none\"\n          />\n          <button\n            type=\"button\"\n            onClick={() => setOpen(false)}\n            className=\"text-kgcraft-muted-foreground hover:text-kgcraft-foreground rounded-sm\"\n            aria-label=\"Close command palette\"\n          >\n            <X className=\"h-4 w-4\" />\n          </button>\n        </div>\n        <div className=\"max-h-80 overflow-y-auto p-2\" role=\"listbox\">\n          {filtered.length ? (\n            filtered.map((item, index) => (\n              <button\n                type=\"button\"\n                role=\"option\"\n                aria-selected={index === activeIndex}\n                key={item.id}\n                onMouseMove={() => setActiveIndex(index)}\n                onClick={() => select(item)}\n                className={cn(\n                  \"hover:bg-kgcraft-accent hover:text-kgcraft-accent-foreground flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm\",\n                  index === activeIndex && \"bg-kgcraft-accent text-kgcraft-accent-foreground\",\n                )}\n              >\n                <span className=\"text-kgcraft-muted-foreground grid h-5 w-5 place-items-center\">\n                  {item.icon ?? <Command className=\"h-4 w-4\" />}\n                </span>\n                <span className=\"min-w-0 flex-1\">\n                  <span className=\"block font-medium\">{item.label}</span>\n                  {item.description ? (\n                    <span className=\"text-kgcraft-muted-foreground block truncate text-xs\">\n                      {item.description}\n                    </span>\n                  ) : null}\n                </span>\n                {item.shortcut ? (\n                  <kbd className=\"border-kgcraft-border text-kgcraft-muted-foreground rounded border px-1.5 py-0.5 text-[10px]\">\n                    {item.shortcut}\n                  </kbd>\n                ) : null}\n              </button>\n            ))\n          ) : (\n            <p className=\"text-kgcraft-muted-foreground py-8 text-center text-sm\">\n              {emptyMessage}\n            </p>\n          )}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
         },
         {
           "path": "registry/kgcraft/kgcraft-utils.ts",
@@ -385,6 +415,7 @@
       "cssVars": {
         "theme": {
           "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
           "color-kgcraft-primary": "var(--kgcraft-primary)",
           "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
           "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -394,10 +425,12 @@
           "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
           "color-kgcraft-border": "var(--kgcraft-border)",
           "color-kgcraft-input": "var(--kgcraft-input)",
-          "color-kgcraft-ring": "var(--kgcraft-ring)"
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
         },
         "light": {
           "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
           "kgcraft-primary": "oklch(0.852 0.199 91.936)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -407,10 +440,12 @@
           "kgcraft-muted-foreground": "oklch(0.556 0 0)",
           "kgcraft-border": "oklch(0.922 0 0)",
           "kgcraft-input": "oklch(0.922 0 0)",
-          "kgcraft-ring": "oklch(0.708 0 0)"
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
         },
         "dark": {
           "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
           "kgcraft-primary": "oklch(0.795 0.184 86.047)",
           "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
           "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -420,7 +455,156 @@
           "kgcraft-muted-foreground": "oklch(0.708 0 0)",
           "kgcraft-border": "oklch(1 0 0 / 10%)",
           "kgcraft-input": "oklch(1 0 0 / 15%)",
-          "kgcraft-ring": "oklch(0.556 0 0)"
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Base UI text input with shadcn styling, validation, file, disabled, and RTL states.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.0.2"
+      ],
+      "files": [
+        {
+          "path": "registry/kgcraft/kgcraft-input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-input.tsx",
+          "content": "import * as React from \"react\";\nimport { Input as InputPrimitive } from \"@base-ui/react/input\";\n\nimport { cn } from \"./kgcraft-utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <InputPrimitive\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"cn-input border-kgcraft-input selection:bg-kgcraft-primary selection:text-kgcraft-primary-foreground file:text-kgcraft-foreground placeholder:text-kgcraft-muted-foreground dark:bg-kgcraft-input/30 h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",\n        \"focus-visible:border-kgcraft-ring focus-visible:ring-kgcraft-ring/50 focus-visible:ring-[3px]\",\n        \"aria-invalid:border-kgcraft-destructive aria-invalid:ring-kgcraft-destructive/20 dark:aria-invalid:ring-kgcraft-destructive/40\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Input };\n"
+        },
+        {
+          "path": "registry/kgcraft/kgcraft-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-utils.ts",
+          "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+        }
+      ],
+      "docs": "Import Input from your configured UI directory's kgcraft-input module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+      "cssVars": {
+        "theme": {
+          "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
+          "color-kgcraft-primary": "var(--kgcraft-primary)",
+          "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+          "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+          "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+          "color-kgcraft-accent": "var(--kgcraft-accent)",
+          "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+          "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+          "color-kgcraft-border": "var(--kgcraft-border)",
+          "color-kgcraft-input": "var(--kgcraft-input)",
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
+        },
+        "light": {
+          "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
+          "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+          "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+          "kgcraft-accent": "oklch(0.97 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+          "kgcraft-border": "oklch(0.922 0 0)",
+          "kgcraft-input": "oklch(0.922 0 0)",
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
+        },
+        "dark": {
+          "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
+          "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+          "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+          "kgcraft-accent": "oklch(0.269 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+          "kgcraft-border": "oklch(1 0 0 / 10%)",
+          "kgcraft-input": "oklch(1 0 0 / 15%)",
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Accessible Base UI tabs with default, line, and vertical layouts.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "clsx@^2.1.1",
+        "tailwind-merge@^3.0.2"
+      ],
+      "files": [
+        {
+          "path": "registry/kgcraft/kgcraft-tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-tabs.tsx",
+          "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\nimport { cn } from \"./kgcraft-utils\";\n\ntype StyledProps<T extends React.ElementType> = Omit<\n  React.ComponentProps<T>,\n  \"className\"\n> & { className?: string };\n\nfunction Tabs({ className, ...props }: StyledProps<typeof TabsPrimitive.Root>) {\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      className={cn(\n        \"group/tabs flex min-w-0 flex-col gap-2 data-[orientation=vertical]:flex-row\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TabsList({\n  className,\n  variant = \"default\",\n  ...props\n}: StyledProps<typeof TabsPrimitive.List> & { variant?: \"default\" | \"line\" }) {\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      data-variant={variant}\n      className={cn(\n        \"group/tabs-list bg-kgcraft-secondary text-kgcraft-muted-foreground inline-flex w-fit items-center gap-1 rounded-lg p-1 data-[orientation=vertical]:flex-col\",\n        variant === \"line\" &&\n          \"border-kgcraft-border rounded-none border-b bg-transparent p-0\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TabsTrigger({\n  className,\n  ...props\n}: StyledProps<typeof TabsPrimitive.Tab>) {\n  return (\n    <TabsPrimitive.Tab\n      data-slot=\"tabs-trigger\"\n      className={cn(\n        \"text-kgcraft-muted-foreground hover:text-kgcraft-foreground focus-visible:ring-kgcraft-ring data-[active]:bg-kgcraft-background data-[active]:text-kgcraft-foreground group-data-[variant=line]/tabs-list:data-[active]:border-b-foreground inline-flex items-center justify-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors outline-none group-data-[variant=line]/tabs-list:rounded-none group-data-[variant=line]/tabs-list:border-b-2 focus-visible:ring-2 focus-visible:ring-offset-2 data-[active]:shadow-sm group-data-[variant=line]/tabs-list:data-[active]:bg-transparent group-data-[variant=line]/tabs-list:data-[active]:shadow-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction TabsContent({\n  className,\n  ...props\n}: StyledProps<typeof TabsPrimitive.Panel>) {\n  return (\n    <TabsPrimitive.Panel\n      data-slot=\"tabs-content\"\n      className={cn(\n        \"focus-visible:ring-kgcraft-ring min-w-0 flex-1 outline-none focus-visible:ring-2\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n"
+        },
+        {
+          "path": "registry/kgcraft/kgcraft-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/kgcraft-utils.ts",
+          "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+        }
+      ],
+      "docs": "Import Tabs from your configured UI directory's kgcraft-tabs module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+      "cssVars": {
+        "theme": {
+          "color-kgcraft-background": "var(--kgcraft-background)",
+          "color-kgcraft-foreground": "var(--kgcraft-foreground)",
+          "color-kgcraft-primary": "var(--kgcraft-primary)",
+          "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+          "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+          "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+          "color-kgcraft-accent": "var(--kgcraft-accent)",
+          "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+          "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+          "color-kgcraft-border": "var(--kgcraft-border)",
+          "color-kgcraft-input": "var(--kgcraft-input)",
+          "color-kgcraft-ring": "var(--kgcraft-ring)",
+          "color-kgcraft-destructive": "var(--kgcraft-destructive)"
+        },
+        "light": {
+          "kgcraft-background": "oklch(1 0 0)",
+          "kgcraft-foreground": "oklch(0.145 0 0)",
+          "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+          "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+          "kgcraft-accent": "oklch(0.97 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+          "kgcraft-border": "oklch(0.922 0 0)",
+          "kgcraft-input": "oklch(0.922 0 0)",
+          "kgcraft-ring": "oklch(0.708 0 0)",
+          "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
+        },
+        "dark": {
+          "kgcraft-background": "oklch(0.145 0 0)",
+          "kgcraft-foreground": "oklch(0.985 0 0)",
+          "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+          "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+          "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+          "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+          "kgcraft-accent": "oklch(0.269 0 0)",
+          "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+          "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+          "kgcraft-border": "oklch(1 0 0 / 10%)",
+          "kgcraft-input": "oklch(1 0 0 / 15%)",
+          "kgcraft-ring": "oklch(0.556 0 0)",
+          "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
         }
       }
     }

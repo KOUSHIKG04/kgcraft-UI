@@ -26,6 +26,7 @@
   "cssVars": {
     "theme": {
       "color-kgcraft-background": "var(--kgcraft-background)",
+      "color-kgcraft-foreground": "var(--kgcraft-foreground)",
       "color-kgcraft-primary": "var(--kgcraft-primary)",
       "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
       "color-kgcraft-secondary": "var(--kgcraft-secondary)",
@@ -35,10 +36,12 @@
       "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
       "color-kgcraft-border": "var(--kgcraft-border)",
       "color-kgcraft-input": "var(--kgcraft-input)",
-      "color-kgcraft-ring": "var(--kgcraft-ring)"
+      "color-kgcraft-ring": "var(--kgcraft-ring)",
+      "color-kgcraft-destructive": "var(--kgcraft-destructive)"
     },
     "light": {
       "kgcraft-background": "oklch(1 0 0)",
+      "kgcraft-foreground": "oklch(0.145 0 0)",
       "kgcraft-primary": "oklch(0.852 0.199 91.936)",
       "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
       "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
@@ -48,10 +51,12 @@
       "kgcraft-muted-foreground": "oklch(0.556 0 0)",
       "kgcraft-border": "oklch(0.922 0 0)",
       "kgcraft-input": "oklch(0.922 0 0)",
-      "kgcraft-ring": "oklch(0.708 0 0)"
+      "kgcraft-ring": "oklch(0.708 0 0)",
+      "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
     },
     "dark": {
       "kgcraft-background": "oklch(0.145 0 0)",
+      "kgcraft-foreground": "oklch(0.985 0 0)",
       "kgcraft-primary": "oklch(0.795 0.184 86.047)",
       "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
       "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
@@ -61,7 +66,8 @@
       "kgcraft-muted-foreground": "oklch(0.708 0 0)",
       "kgcraft-border": "oklch(1 0 0 / 10%)",
       "kgcraft-input": "oklch(1 0 0 / 15%)",
-      "kgcraft-ring": "oklch(0.556 0 0)"
+      "kgcraft-ring": "oklch(0.556 0 0)",
+      "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
     }
   }
 }

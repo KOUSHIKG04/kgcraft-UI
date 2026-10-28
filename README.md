@@ -19,6 +19,7 @@ npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/scramble-text.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/shimmer-text.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/search-bar.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/command-palette.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/input.json
 ```
 
 Browse the live component documentation at [kgcraft-ui-web.vercel.app](https://kgcraft-ui-web.vercel.app/). The documentation page automatically uses its current origin in its copyable commands.

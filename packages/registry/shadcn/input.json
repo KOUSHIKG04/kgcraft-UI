@@ -1,0 +1,74 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "Base UI text input with shadcn styling, validation, file, disabled, and RTL states.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "clsx@^2.1.1",
+    "tailwind-merge@^3.0.2"
+  ],
+  "files": [
+    {
+      "path": "registry/kgcraft/kgcraft-input.tsx",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-input.tsx",
+      "content": "import * as React from \"react\";\nimport { Input as InputPrimitive } from \"@base-ui/react/input\";\n\nimport { cn } from \"./kgcraft-utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <InputPrimitive\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"cn-input border-kgcraft-input selection:bg-kgcraft-primary selection:text-kgcraft-primary-foreground file:text-kgcraft-foreground placeholder:text-kgcraft-muted-foreground dark:bg-kgcraft-input/30 h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",\n        \"focus-visible:border-kgcraft-ring focus-visible:ring-kgcraft-ring/50 focus-visible:ring-[3px]\",\n        \"aria-invalid:border-kgcraft-destructive aria-invalid:ring-kgcraft-destructive/20 dark:aria-invalid:ring-kgcraft-destructive/40\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Input };\n"
+    },
+    {
+      "path": "registry/kgcraft/kgcraft-utils.ts",
+      "type": "registry:ui",
+      "target": "@ui/kgcraft-utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"
+    }
+  ],
+  "docs": "Import Input from your configured UI directory's kgcraft-input module. Requires Tailwind CSS 4. No KGCraft CLI or runtime package is needed.",
+  "cssVars": {
+    "theme": {
+      "color-kgcraft-background": "var(--kgcraft-background)",
+      "color-kgcraft-foreground": "var(--kgcraft-foreground)",
+      "color-kgcraft-primary": "var(--kgcraft-primary)",
+      "color-kgcraft-primary-foreground": "var(--kgcraft-primary-foreground)",
+      "color-kgcraft-secondary": "var(--kgcraft-secondary)",
+      "color-kgcraft-secondary-foreground": "var(--kgcraft-secondary-foreground)",
+      "color-kgcraft-accent": "var(--kgcraft-accent)",
+      "color-kgcraft-accent-foreground": "var(--kgcraft-accent-foreground)",
+      "color-kgcraft-muted-foreground": "var(--kgcraft-muted-foreground)",
+      "color-kgcraft-border": "var(--kgcraft-border)",
+      "color-kgcraft-input": "var(--kgcraft-input)",
+      "color-kgcraft-ring": "var(--kgcraft-ring)",
+      "color-kgcraft-destructive": "var(--kgcraft-destructive)"
+    },
+    "light": {
+      "kgcraft-background": "oklch(1 0 0)",
+      "kgcraft-foreground": "oklch(0.145 0 0)",
+      "kgcraft-primary": "oklch(0.852 0.199 91.936)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.967 0.001 286.375)",
+      "kgcraft-secondary-foreground": "oklch(0.21 0.006 285.885)",
+      "kgcraft-accent": "oklch(0.97 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.205 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.556 0 0)",
+      "kgcraft-border": "oklch(0.922 0 0)",
+      "kgcraft-input": "oklch(0.922 0 0)",
+      "kgcraft-ring": "oklch(0.708 0 0)",
+      "kgcraft-destructive": "oklch(0.577 0.245 27.325)"
+    },
+    "dark": {
+      "kgcraft-background": "oklch(0.145 0 0)",
+      "kgcraft-foreground": "oklch(0.985 0 0)",
+      "kgcraft-primary": "oklch(0.795 0.184 86.047)",
+      "kgcraft-primary-foreground": "oklch(0.421 0.095 57.708)",
+      "kgcraft-secondary": "oklch(0.274 0.006 286.033)",
+      "kgcraft-secondary-foreground": "oklch(0.985 0 0)",
+      "kgcraft-accent": "oklch(0.269 0 0)",
+      "kgcraft-accent-foreground": "oklch(0.985 0 0)",
+      "kgcraft-muted-foreground": "oklch(0.708 0 0)",
+      "kgcraft-border": "oklch(1 0 0 / 10%)",
+      "kgcraft-input": "oklch(1 0 0 / 15%)",
+      "kgcraft-ring": "oklch(0.556 0 0)",
+      "kgcraft-destructive": "oklch(0.704 0.191 22.216)"
+    }
+  }
+}

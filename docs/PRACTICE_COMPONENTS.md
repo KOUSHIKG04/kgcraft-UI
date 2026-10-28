@@ -68,6 +68,18 @@ Open `packages/ui/src/components/command-palette/command-palette.tsx`.
 
 Practice: add group headings such as “Navigation” and “Settings”, then keep keyboard selection working when a group has no matches.
 
+### Input
+
+Open `packages/ui/src/components/input/input.tsx`.
+
+- `InputPrimitive` comes from Base UI, matching shadcn's Base UI implementation.
+- Native input props provide text, email, password, number, search, file, required, disabled, and RTL behavior.
+- `aria-invalid="true"` activates the destructive border and ring.
+- `data-slot="input"` lets composed components target the input consistently.
+- Semantic theme tokens keep light and dark styles aligned with the receiving project.
+
+Practice: compose Input with a native `label` and error message, connect them using `htmlFor` and `aria-describedby`, then test the form using only the keyboard.
+
 ## Add your next component
 
 Suppose the next component is `typing-text`:
@@ -107,6 +119,7 @@ npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/scramble-text.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/shimmer-text.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/search-bar.json
 npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/command-palette.json
+npx shadcn@latest add https://kgcraft-ui-web.vercel.app/r/input.json
 ```
 
 These four URLs become available after the source and generated files are pushed and Vercel finishes the next deployment.

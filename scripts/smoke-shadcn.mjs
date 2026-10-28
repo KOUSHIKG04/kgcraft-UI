@@ -122,8 +122,9 @@ import { ScrambleText } from "./components/ui/kgcraft-scramble-text";
 import { ShimmerText } from "./components/ui/kgcraft-shimmer-text";
 import { SearchBar } from "./components/ui/kgcraft-search-bar";
 import { CommandPalette } from "./components/ui/kgcraft-command-palette";
+import { Input } from "./components/ui/kgcraft-input";
 import "./index.css";
-createRoot(document.getElementById("root")!).render(<main className="p-8"><Button variant="briskPrimary">Contact me</Button><Accordion content="Installed using shadcn">About me</Accordion><ScrambleText text="Hello" /><ShimmerText text="Loading" /><SearchBar /><CommandPalette items={[]} /></main>);
+createRoot(document.getElementById("root")!).render(<main className="p-8"><Button variant="briskPrimary">Contact me</Button><Accordion content="Installed using shadcn">About me</Accordion><ScrambleText text="Hello" /><ShimmerText text="Loading" /><SearchBar /><CommandPalette items={[]} /><Input type="email" placeholder="name@example.com" /></main>);
 `,
 );
 const requests = [];
@@ -135,6 +136,7 @@ const server = createServer(async (req, res) => {
     "/r/shimmer-text.json": "shimmer-text.json",
     "/r/search-bar.json": "search-bar.json",
     "/r/command-palette.json": "command-palette.json",
+    "/r/input.json": "input.json",
   };
   requests.push(req.url);
   if (!files[req.url]) {
@@ -162,7 +164,7 @@ try {
   );
   await npm("exec -- shadcn --version");
   await npm(
-    `exec -- shadcn add ${base}/button.json ${base}/accordion.json ${base}/scramble-text.json ${base}/shimmer-text.json ${base}/search-bar.json ${base}/command-palette.json --yes`,
+    `exec -- shadcn add ${base}/button.json ${base}/accordion.json ${base}/scramble-text.json ${base}/shimmer-text.json ${base}/search-bar.json ${base}/command-palette.json ${base}/input.json --yes`,
   );
   const css = await readFile(path.join(cwd, "src/index.css"), "utf8");
   assert.match(css, /--kgcraft-primary:/);
@@ -201,6 +203,13 @@ try {
       /use client/,
     );
   }
+  assert.match(
+    await readFile(
+      path.join(cwd, "src/components/ui/kgcraft-input.tsx"),
+      "utf8",
+    ),
+    /@base-ui\/react\/input/,
+  );
   if (!remoteBase) {
     for (const name of [
       "button",
@@ -209,6 +218,7 @@ try {
       "shimmer-text",
       "search-bar",
       "command-palette",
+      "input",
     ])
       assert.ok(requests.includes(`/r/${name}.json`));
   }
@@ -228,7 +238,7 @@ try {
   config.aliases.ui = "@/design/primitives";
   await write("components.json", config);
   await npm(
-    `exec -- shadcn add ${base}/button.json ${base}/accordion.json ${base}/scramble-text.json ${base}/shimmer-text.json ${base}/search-bar.json ${base}/command-palette.json --yes`,
+    `exec -- shadcn add ${base}/button.json ${base}/accordion.json ${base}/scramble-text.json ${base}/shimmer-text.json ${base}/search-bar.json ${base}/command-palette.json ${base}/input.json --yes`,
   );
   assert.match(
     await readFile(
@@ -254,6 +264,7 @@ try {
     "tailwind-merge",
     "framer-motion",
     "lucide-react",
+    "@base-ui/react",
   ])
     assert.ok(deps[name]);
   assert.ok(!deps["kgcraft-ui-cli"] && !deps["@repo/ui"]);
